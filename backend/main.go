@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -51,6 +52,34 @@ func connectMongo() (*mongo.Client, context.Context, context.CancelFunc, error) 
 	return client, ctx, cancel, nil
 }
 
+func viewForm(c *gin.Context) {
+    client, ctx, cancel, err := connectMongo()
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    defer client.Disconnect(ctx)
+    defer cancel()
+
+    formIDStr := c.Query("id")
+    if formIDStr == "" {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Form id is required"})
+        return
+    }
+
+    var result Form
+    if err := client.Database("graphforms").Collection("forms").FindOne(context.TODO(), bson.D{{"id", formIDStr}}).Decode(&result); err != nil {
+        c.JSON(http.StatusNotFound, gin.H{"error": "Form not found"})
+        return
+    }
+
+    c.JSON(http.StatusOK, result)
+}
+
+
+
+
+
 func createForm(c *gin.Context) {
 	// Connect to the MongoDB database
 	client, ctx, cancel, err := connectMongo()
@@ -90,6 +119,7 @@ func createForm(c *gin.Context) {
 
 func main() {
     router := gin.Default()
+	router.GET("/viewForm", viewForm)
 	router.POST("/createForm", createForm)
 
     router.Run("localhost:8080")
