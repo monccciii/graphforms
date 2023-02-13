@@ -16,6 +16,10 @@ export default function Home() {
       </Head>
       <div className='bg-black h-[100vh]'>
         <p className='text-white text-center text-2xl'>test</p>
+        <div className='flex'>
+        <button className='2xl mx-auto text-white bg-blue-500 rounded-2xl p-10'>Counter increment</button>
+        </div>
+        <p>#</p>
       </div>
     </>
   )
