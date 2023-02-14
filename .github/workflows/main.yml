@@ -33,8 +33,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: GraphForms
-        environment_name: GraphForms-Prod
+        application_name: Graphforms
+        environment_name: Graphforms-Prod
         version_label: 0
         region: us-east-2
         deployment_package: deploy.zip
