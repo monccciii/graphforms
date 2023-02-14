@@ -14,9 +14,12 @@ jobs:
       with:
         go-version: 1.x
 
+    - name: Initialize Go module
+      run: go mod init
+
     - name: Build Go application
-      run: |
-        go build -o app
+      run: go build -o app
+
     - name: Generate deployment package
       run: zip -r deploy.zip backend -x '*.git*'
 
