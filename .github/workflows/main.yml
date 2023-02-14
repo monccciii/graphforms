@@ -14,8 +14,11 @@ jobs:
       with:
         go-version: 1.x
 
+    - name: Show files in directory
+      run: ls
+      
     - name: Initialize Go module
-      run: go mod init github.com/monccciii/graphforms
+      run: go mod init github.com/monccciii/backend
 
     - name: Build Go application
       run: go build -o app
