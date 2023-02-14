@@ -36,5 +36,5 @@ jobs:
         application_name: Graphforms
         environment_name: Graphforms-Prod
         version_label: 0
-        region: us-east-2
+        region: us-east-1
         deployment_package: deploy.zip
