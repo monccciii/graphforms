@@ -21,7 +21,9 @@ jobs:
       run: go mod init github.com/monccciii/backend
 
     - name: Build Go application
-      run: go build -o app
+      run: |
+        cd backend;
+        go build -o app
 
     - name: Generate deployment package
       run: zip -r deploy.zip backend -x '*.git*'
