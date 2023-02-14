@@ -1,8 +1,5 @@
 name: Graphforms Backend
-on:
-  push:
-    branches:
-    - master
+on: push
 
 jobs:
   build:
