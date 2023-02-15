@@ -22,7 +22,10 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
-
+      
+    - name: Initialize Go module
+      run: go mod init github.com/monccciii/backend
+      
     - name: Build Go application
       run: |
         go build -o bin/application application.go
