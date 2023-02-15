@@ -31,6 +31,9 @@ jobs:
         cd backend
         go build -o bin/application
         
+    - name: Create S3 bucket if it doesn't exist
+      run: aws s3api create-bucket --bucket Graphforms --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1 || true
+
     - name: Package and upload to S3
       run: |
         cd backend
