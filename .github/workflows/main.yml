@@ -30,6 +30,13 @@ jobs:
       run: |
         cd backend
         go build -o bin/application
+        
+    - name: Package and upload to S3
+      run: |
+        cd backend
+        zip -r Graphforms-Backend-${{ env.GITHUB_SHA }}.zip bin/application
+        aws s3 cp Graphforms-Backend-${{ env.GITHUB_SHA }}.zip s3://Graphforms/Graphforms-Backend-${{ env.GITHUB_SHA }}.zip
+
 
     - name: Deploy to AWS Elastic Beanstalk
       run: |
