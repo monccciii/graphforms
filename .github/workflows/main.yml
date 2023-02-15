@@ -36,7 +36,7 @@ jobs:
         aws elasticbeanstalk create-application-version \
           --application-name Graphforms \
           --version-label Graphforms-Backend-${{ env.GITHUB_SHA }} \
-          --source-bundle S3Bucket=my-go-application-source-bundle,S3Key=Graphforms-Backend-${{ env.GITHUB_SHA }}.zip
+          --source-bundle S3Bucket=Graphforms,S3Key=Graphforms-Backend-${{ env.GITHUB_SHA }}.zip
 
         aws elasticbeanstalk update-environment \
           --environment-name Graphforms-Prod \
