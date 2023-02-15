@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  AWS_REGION: us-west-2
+  AWS_REGION: us-east-1
 
 jobs:
   deploy:
@@ -21,14 +21,14 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: us-east-1
       
     - name: Initialize Go module
       run: go mod init github.com/monccciii/backend
       
     - name: Build Go application
       run: |
-        go build -o bin/application application.go
+        go build -o bin/application main.go
 
     - name: Deploy to AWS Elastic Beanstalk
       run: |
