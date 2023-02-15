@@ -29,7 +29,7 @@ jobs:
     - name: Build Go application
       run: |
         cd backend
-        go build -o bin/application application.go
+        go build -o bin/application
 
     - name: Deploy to AWS Elastic Beanstalk
       run: |
