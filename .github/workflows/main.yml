@@ -28,7 +28,8 @@ jobs:
       
     - name: Build Go application
       run: |
-        go build -o bin/application main.go
+        cd backend
+        go build -o bin/application application.go
 
     - name: Deploy to AWS Elastic Beanstalk
       run: |
