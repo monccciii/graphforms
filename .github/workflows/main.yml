@@ -1,35 +1,50 @@
-name: Graphforms Backend
+name: Deploy GraphForms Backend to AWS Elastic Beanstalk
+
 on:
   push:
-    branches:
-    - master
+    branches: 
+      - main
+
+env:
+  AWS_REGION: us-east-1 
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
+  deploy:
+    runs-on: ubuntu-latest 
 
-    - name: Checkout source code
+    steps:
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Go environment
-      uses: actions/setup-go@v2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        go-version: 1.x
-
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+      
+    - name: Initialize Go module
+      run: go mod init github.com/monccciii/backend
+      
     - name: Build Go application
       run: |
-        go build -o app
-    - name: Generate deployment package
-      run: zip -r deploy.zip backend -x '*.git*'
+        cd backend
+        go build -o bin/application
+      
+    - name: Package and upload to S3
+      run: |
+        cd backend
+        zip -r Graphforms-Backend-${{ env.GITHUB_SHA }}.zip bin/application
+        aws s3 cp Graphforms-Backend-${{ env.GITHUB_SHA }}.zip s3://graphforms/Graphforms-Backend-${{ env.GITHUB_SHA }}.zip
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v21
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: GraphForms
-        environment_name: GraphForms-Prod
-        version_label: 0
-        region: us-east-2
-        deployment_package: deploy.zip
+
+    - name: Deploy to AWS Elastic Beanstalk
+      run: |
+        aws elasticbeanstalk create-application-version \
+          --application-name Graphforms \
+          --version-label Graphforms-Backend-${{ env.GITHUB_SHA }} \
+          --source-bundle S3Bucket=graphforms,S3Key=Graphforms-Backend-${{ env.GITHUB_SHA }}.zip
+
+        aws elasticbeanstalk update-environment \
+          --environment-name Graphforms-Prod \
+          --version-label Graphforms-Backend-${{ env.GITHUB_SHA }}
