@@ -40,6 +40,10 @@ type Question struct {
 }
 
 
+func landing(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message":"welcome!"})
+}
+
 func connectMongo() (*mongo.Client, context.Context, context.CancelFunc, error) {
 	// Load the environment variables
 	if err := godotenv.Load(); err != nil {
@@ -253,6 +257,7 @@ func getResponses(c *gin.Context) {
 
 func main() {
     router := gin.Default()
+	router.GET("/", landing)
 	router.GET("/viewForm", viewForm)
 	router.POST("/createForm", createForm)
 	router.POST("/register", registerUser)
