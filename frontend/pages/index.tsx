@@ -43,7 +43,9 @@ export default function Landing() {
 =        <p className='text-center text-black text-xl'>
           No! test2
         </p>
-        <button onClick={() => setCounter(counter + 1)}>{counter}</button>
+        <div className='flex'>
+          <button className='mx-auto bg-blue-500 font-bold' onClick={() => setCounter(counter + 1)}>{counter}</button>
+        </div>
       </div>
     </>
   )
