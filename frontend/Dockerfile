@@ -1,20 +1,17 @@
-# Use an official Node.js runtime as a parent image
 FROM node:14.21.2-alpine3.16
 
-# Set the working directory to /app
 WORKDIR /app
 
-# Copy the package.json and yarn.lock files to the container
 COPY package.json yarn.lock ./
 
-# Install the dependencies with yarn
 RUN yarn install
 
-# Copy the rest of the application code to the container
 COPY . .
 
-# Make sure the application is built
 RUN yarn build
 
-# Start the application
+RUN docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+
+RUN docker rmi $(docker images -aq)
+
 CMD ["yarn", "start"]
