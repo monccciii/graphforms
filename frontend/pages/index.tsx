@@ -18,6 +18,11 @@ export default function Landing() {
   useEffect(() => {
     fetchData();
   }, [])
+  useEffect(() => {
+    if (url) {
+      console.log(url)
+    }
+  })
 
   return (
     <>
