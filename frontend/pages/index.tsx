@@ -4,9 +4,13 @@ import { useEffect } from 'react';
 
 
 export default function Landing() {
-
+  const url = process.env.NEXT_PUBLIC_API_URL
   async function fetchData() {
-      const response = await fetch(process.env.NEXT_PUBLIC_API_URL);
+    if (!url) {
+      console.error("API URL not defined");
+      return;
+    }
+      const response = await fetch(url);
       const data = await response.json();
       console.log(data);
     }
