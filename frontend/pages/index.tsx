@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 
 export default function Landing() {
+
   async function fetchData() {
       const response = await fetch(process.env.NEXT_PUBLIC_API_URL);
       const data = await response.json();
@@ -13,9 +14,6 @@ export default function Landing() {
   useEffect(() => {
     fetchData();
   }, [])
-
-  
-
 
   return (
     <>
@@ -27,10 +25,10 @@ export default function Landing() {
       </Head>
       <div className='bg-white h-[100vh]'>
         <div className='p-5 bg-slate-200 w-full'>
-        <h1 className='text-left text-black text-5xl'>Graphforms</h1>
+        <h1 className='text-left text-black text-3xl'>Graphforms</h1>
 
         </div>
-=        <p className='text-center text-black text-2xl'>
+=        <p className='text-center text-black text-xl'>
           No! test2
         </p>
       </div>
