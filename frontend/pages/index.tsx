@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export default function Landing() {
   const url = process.env.NEXT_PUBLIC_API_URL
+  const [counter, setCounter] = useState(0);
   async function fetchData() {
     if (!url) {
       console.error("API URL not defined");
@@ -42,6 +43,7 @@ export default function Landing() {
 =        <p className='text-center text-black text-xl'>
           No! test2
         </p>
+        <button onClick={() => setCounter(counter + 1)}>{counter}</button>
       </div>
     </>
   )
