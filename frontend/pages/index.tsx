@@ -21,6 +21,8 @@ export default function Landing() {
   useEffect(() => {
     if (url) {
       console.log(url)
+    } else {
+      console.log("no url available")
     }
   })
 
