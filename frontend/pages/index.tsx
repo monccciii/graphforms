@@ -4,7 +4,17 @@ import { useEffect } from 'react';
 
 
 export default function Landing() {
- 
+  async function fetchData() {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_URL);
+      const data = await response.json();
+      console.log(data);
+    }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  
 
 
   return (
