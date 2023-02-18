@@ -15,8 +15,12 @@ export default function Landing() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className='bg-black h-[100vh]'>
-        <p className='text-center text-white text-2xl'>
+      <div className='bg-white h-[100vh]'>
+        <div className='p-5 bg-slate-200 w-full'>
+        <h1 className='text-left text-black text-5xl'>Graphforms</h1>
+
+        </div>
+=        <p className='text-center text-black text-2xl'>
           No! test2
         </p>
       </div>
