@@ -17,7 +17,7 @@ export default function Landing() {
       </Head>
       <div className='bg-black h-[100vh]'>
         <p className='text-center text-white text-2xl'>
-          No!
+          No! test2
         </p>
       </div>
     </>
