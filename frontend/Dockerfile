@@ -10,8 +10,4 @@ COPY . .
 
 RUN yarn build
 
-RUN docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
-
-RUN docker rmi $(docker images -aq)
-
 CMD ["yarn", "start"]
