@@ -44,6 +44,16 @@ func landing(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message":"welcome!"})
 }
 
+func connectionTest(c *gin.Context) {
+    client, ctx, cancel, err := connectMongo()
+	if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    defer client.Disconnect(ctx)
+    defer cancel()
+}
+
 func connectMongo() (*mongo.Client, context.Context, context.CancelFunc, error) {
 	// Load the environment variables
 	if err := godotenv.Load(); err != nil {
@@ -258,6 +268,7 @@ func getResponses(c *gin.Context) {
 func main() {
     router := gin.Default()
 	router.GET("/", landing)
+	router.GET("/conntest", connectionTest)
 	router.GET("/viewForm", viewForm)
 	router.POST("/createForm", createForm)
 	router.POST("/register", registerUser)
