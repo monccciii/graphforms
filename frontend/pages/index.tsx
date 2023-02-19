@@ -1,11 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
-import getConfig from 'next/config'
-
-// Only holds serverRuntimeConfig and publicRuntimeConfig
-const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
-// Will only be available on the server-side
 
 export default function Landing() {
   const url = process.env.NEXT_PUBLIC_API_URL;
