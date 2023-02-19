@@ -10,7 +10,7 @@ jobs:
 
 #if it starts erroring change name of zip from deploy to ${{ github.sha }}}
       - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+        run: zip -r ${{ github.sha }}.zip . -x '*.git*'
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
@@ -21,4 +21,4 @@ jobs:
           environment_name: Graphforms-env
           version_label: ${{ github.sha }}
           region: us-east-1
-          deployment_package: deploy.zip
+          deployment_package: ${{ github.sha }}.zip
