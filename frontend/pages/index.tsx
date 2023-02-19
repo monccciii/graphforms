@@ -1,31 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
+import getConfig from 'next/config'
 
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+// Will only be available on the server-side
 
 export default function Landing() {
-  const url = process.env.NEXT_PUBLIC_API_URL
+  const url = process.env.NEXT_PUBLIC_API_URL;
   const [counter, setCounter] = useState(0);
-  async function fetchData() {
-    if (!url) {
-      console.error("API URL not defined");
-      return;
-    }
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
-    }
 
   useEffect(() => {
-    fetchData();
-  }, [])
-  useEffect(() => {
-    if (url) {
-      console.log(url)
-    } else {
-      console.log("no url available")
-    }
-  })
+    console.log(url);
+  }, []);
+  
 
   return (
     <>

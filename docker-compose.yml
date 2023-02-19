@@ -5,23 +5,19 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        API_URL: http://localhost:8080
     ports:
       - "80:3000"
-    env_file:
-      - .env
-    environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     networks:
       - app-network
-
+      
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    env_file:
-      - .env
     networks:
       - app-network
 
