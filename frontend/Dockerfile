@@ -4,12 +4,12 @@ ARG API_URL
 
 WORKDIR /app
 
+RUN echo "NEXT_PUBLIC_API_URL=${API_URL}" > .env.local
+
 COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY . .
-
-RUN echo "NEXT_PUBLIC_API_URL=${API_URL}" > .env.local
 
 RUN yarn build
 
