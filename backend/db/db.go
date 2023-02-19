@@ -4,6 +4,6 @@ import (
 	"fmt"
 )
 
-func main() {
+func connecttoMongo() {
 	fmt.Println("test2")
 }
