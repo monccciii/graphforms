@@ -6,8 +6,21 @@ export default function Landing() {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [counter, setCounter] = useState(0);
 
+  async function createUser(username:string, password:string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username, password: password })
+    };
+    const response = await fetch(`${url}/register`, requestOptions);
+    const data = await response.json();
+    console.log(data);
+  }
+  
+
   useEffect(() => {
     console.log(url);
+    createUser("joe", "123")
   }, []);
   
 
