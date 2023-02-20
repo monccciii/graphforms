@@ -265,7 +265,6 @@ func getResponses(c *gin.Context) {
 }
 
 
-
 func main() {
     router := gin.Default()
 	router.GET("/", landing)
