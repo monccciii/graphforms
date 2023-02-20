@@ -6,11 +6,13 @@ export default function Landing() {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [counter, setCounter] = useState(0);
 
-  async function testConnection() {
-    const response = await fetch(`${url}/`);
-    const data = await response.json();
-    console.log(data);
+  function testConnection() {
+    fetch(`${url}/`)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   }
+  
 
   useEffect(() => {
     console.log(url);
