@@ -9,10 +9,9 @@ RUN go mod download
 
 COPY . .
 
+RUN chmod +x app
 
 RUN go build -o app .
-
-RUN chmod +x app
 
 EXPOSE 80
 
