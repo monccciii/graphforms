@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:start": "env-cmd -f .env yarn build && yarn start --port 80"
+    "build2": "env-cmd -f .env yarn build"
 
   },
   "dependencies": {
