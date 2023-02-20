@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 export default function Landing() {
   const url = process.env.API_URL;
   const [counter, setCounter] = useState(0);
-  
 
   useEffect(() => {
     console.log(url);
