@@ -6,6 +6,9 @@ export default function Landing() {
   const url = process.env.NEXT_PUBLIC_API_URL
   const [counter, setCounter] = useState(0);
 
+  function register() {
+    
+  }
   useEffect(() => {
     console.log(url);
   }, []);
