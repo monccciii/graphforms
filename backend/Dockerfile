@@ -12,6 +12,8 @@ COPY . .
 
 RUN go build -o app .
 
+RUN chmod +x app
+
 EXPOSE 80
 
 CMD ["./app"]
