@@ -45,6 +45,7 @@ func landing(c *gin.Context) {
 }
 
 func connectionTest(c *gin.Context) {
+	
     client, ctx, cancel, err := connectMongo()
 	if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -52,6 +53,7 @@ func connectionTest(c *gin.Context) {
     }
     defer client.Disconnect(ctx)
     defer cancel()
+	c.JSON(http.StatusOK, gin.H{"message":"successful!"})
 }
 
 func connectMongo() (*mongo.Client, context.Context, context.CancelFunc, error) {

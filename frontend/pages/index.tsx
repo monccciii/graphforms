@@ -7,7 +7,7 @@ export default function Landing() {
   const [counter, setCounter] = useState(0);
 
   async function testConnection() {
-    const response = await fetch(`${url}/conntest`);
+    const response = await fetch(`${url}/`);
     const data = await response.json();
     console.log(data);
   }
