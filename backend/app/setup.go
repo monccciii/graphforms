@@ -1,6 +1,9 @@
 package app
 
 import (
+	"os"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/monccciii/graphforms/db"
@@ -25,7 +28,9 @@ func SetupApp() error {
 	app.Use(gin.Recovery())
 	app.Use(gin.Logger())
 
+	app.Use(cors.New(cors.Config{AllowOrigins:[]string{os.Getenv("FRONTEND_URI")}}))
+
 	router.SetupRoutes(app)
-	app.Run("0.0.0.0:8080")
+	app.Run("0.0.0.0:80")
 	return nil
 }
