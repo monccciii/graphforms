@@ -2,9 +2,6 @@ FROM golang:1.19.6-alpine3.17
 
 WORKDIR /app
 
-ARG DB_URI
-RUN echo "MONGODB_URI=${DB_URI}" > .env
-
 COPY go.mod ./
 COPY go.sum ./
 
