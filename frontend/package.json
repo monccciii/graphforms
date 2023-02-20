@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "env-cmd -f /opt/elasticbeanstalk/deployment/env.list next start",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
