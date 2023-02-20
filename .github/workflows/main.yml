@@ -7,17 +7,32 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-#if it starts erroring change name of zip from deploy to ${{ github.sha }}}
-      - name: Generate deployment package
-        run: zip -r ${{ github.sha }}.zip . -x '*.git*'
 
-      - name: Deploy to EB
+      - name: Generate frontend deployment package
+        run: cd frontend && zip -r ../${{ github.sha }}-frontend.zip .
+
+      - name: Generate backend deployment package
+        run: cd backend && zip -r ../${{ github.sha }}-backend.zip .
+
+      - name: Deploy frontend to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: Graphforms
-          environment_name: Graphforms-env-1
-          version_label: ${{ github.sha }}
+          environment_name: Graphforms-frontend
+          version_label: ${{ github.sha }}-frontend
           region: us-east-1
-          deployment_package: ${{ github.sha }}.zip
+          deployment_package: ${{ github.sha }}-frontend.zip
+
+      - name: Deploy backend to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: Graphforms
+          environment_name: Graphforms-backend
+          version_label: ${{ github.sha }}-backend
+          region: us-east-1
+          deployment_package: ${{ github.sha }}-backend.zip
+
