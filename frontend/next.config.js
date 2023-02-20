@@ -3,4 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+const withDotenv = require('next-env')
+
+const withEnv = withDotenv()
+
+module.exports = withEnv({
+  env: {
+    API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
+})
