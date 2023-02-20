@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build2": "env-cmd -f .env yarn build"
+    "build2": "env-cmd yarn build"
 
   },
   "dependencies": {
