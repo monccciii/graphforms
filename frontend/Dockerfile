@@ -13,6 +13,5 @@ COPY . .
 
 RUN yarn build
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start", "--port", "80"]
 
-EXPOSE 80
