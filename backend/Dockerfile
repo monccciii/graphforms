@@ -4,15 +4,12 @@ WORKDIR /app
 
 COPY go.mod ./
 COPY go.sum ./
-
 RUN go mod download
 
 COPY . .
 
-RUN chmod a+x app
-
-RUN go build -o app .
+RUN go build -o /graphforms-backend
 
 EXPOSE 80
 
-CMD ["./app"]
+CMD [ "/graphforms-backend" ]
