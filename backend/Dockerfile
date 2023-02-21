@@ -12,4 +12,4 @@ RUN go build -o /graphforms-backend
 
 EXPOSE 80
 
-CMD [ "/graphforms-backend" ]
+CMD ["/graphforms-backend"]
