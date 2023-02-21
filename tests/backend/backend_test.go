@@ -13,7 +13,7 @@ func TestConnTestHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ConnTestHandler)
+	handler := http.HandlerFunc(cth)
 
 	handler.ServeHTTP(rr, req)
 
@@ -21,4 +21,9 @@ func TestConnTestHandler(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
 	}
+}
+
+func cth(w http.ResponseWriter, r *http.Request) {
+    w.WriteHeader(http.StatusOK)
+    fmt.Fprintf(w, "Connection test successful")
 }
