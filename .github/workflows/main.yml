@@ -20,7 +20,7 @@ jobs:
         run: cd backend && go run main.go &
 
       - name: Run tests
-        run: cd tests/backend && go mod init && go test -v
+        run: cd tests/backend && go mod init github.com/monccciii/graphforms/test && go test -v
 
       - name: Stop backend server
         run: pkill -f "go run main.go"
