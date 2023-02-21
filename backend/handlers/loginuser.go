@@ -20,23 +20,19 @@ func LoginUser(c *gin.Context) {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	// Get the username and password from the request body
-	var loginDetails struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
-	if err := c.ShouldBindJSON(&loginDetails); err != nil {
+
+	if err := c.ShouldBindJSON(&models.LoginDetails); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 
 	// Check if the provided username and password match what's stored in the database
 	var user models.User
-	if err := client.Database("graphforms").Collection("users").FindOne(context.TODO(), bson.D{{"username", loginDetails.Username}}).Decode(&user); err != nil {
+	if err := client.Database("graphforms").Collection("users").FindOne(context.TODO(), bson.D{{"username", models.LoginDetails.Username}}).Decode(&user); err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Username not found"})
 		return
 	}
-	if user.Password != loginDetails.Password {
+	if user.Password != models.LoginDetails.Password {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect password"})
 		return
 	}

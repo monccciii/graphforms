@@ -5,11 +5,14 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/monccciii/graphforms/db"
 	"github.com/monccciii/graphforms/router"
 )
 
 func SetupApp() error {
+	//add a env variable check later
+	godotenv.Load();
 	client, ctx, cancel, err := db.ConnectMongo()
 	if err != nil {
 		return err

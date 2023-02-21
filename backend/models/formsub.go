@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type FormSub struct {
 	ID        string     `json:"id" bson:"id"`
