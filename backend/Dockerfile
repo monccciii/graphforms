@@ -9,7 +9,7 @@ RUN go mod download
 
 COPY . .
 
-RUN chmod +x app
+RUN chmod a+x app
 
 RUN go build -o app .
 
