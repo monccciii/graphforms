@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"fmt"
 )
 
 func TestConnTestHandler(t *testing.T) {
