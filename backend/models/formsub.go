@@ -9,5 +9,5 @@ type FormSub struct {
 	Creator   string     `json:"creator" bson:"creator"`
 	Username  string     `json:"username" bson:"username"`
 	Timestamp time.Time  `json:"timestamp" bson:"timestamp"`
-	Questions []Question `json:"questions" bson:"questions"`
+	Questions []QuestionAnswer `json:"questions" bson:"questions"`
 }

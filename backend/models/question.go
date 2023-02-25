@@ -1,6 +1,7 @@
 package models
 
 type Question struct {
-	Question string `json:"question" bson:"question"`
-	Answer   string `json:"answer" bson:"answer"`
+	Text    string        `json:"question" bson:"question"`
+	Type    string        `json:"type" bson:"type"`
+	Options []interface{} `json:"options" bson:"options"`
 }
