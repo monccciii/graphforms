@@ -22,9 +22,6 @@ func SetupApp() error {
 	
 	app := gin.Default()
 
-	app.Use(gin.Recovery())
-	app.Use(gin.Logger())
-
 	app.Use(cors.New(cors.Config{AllowOrigins:[]string{os.Getenv("FRONTEND_URI")}}))
 
 	router.SetupRoutes(app)

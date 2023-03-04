@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"encoding/json"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,7 +10,6 @@ import (
 	"github.com/monccciii/graphforms/models"
 	"go.mongodb.org/mongo-driver/bson"
 )
-
 func ViewForm(c *gin.Context) {
 	client, ctx, cancel, err := db.ConnectMongo()
 	if err != nil {
@@ -19,14 +19,16 @@ func ViewForm(c *gin.Context) {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	formIDStr := c.Query("id")
-	if formIDStr == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Form id is required"})
+	var id struct {
+		ID string `json:"id"`
+	}
+	if err := json.NewDecoder(c.Request.Body).Decode(&id); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	var result models.Form
-	if err := client.Database("graphforms").Collection("forms").FindOne(context.TODO(), bson.D{{"id", formIDStr}}).Decode(&result); err != nil {
+	if err := client.Database("graphforms").Collection("forms").FindOne(context.TODO(), bson.M{"id": id.ID}).Decode(&result); err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Form not found"})
 		return
 	}

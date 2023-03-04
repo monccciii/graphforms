@@ -10,27 +10,43 @@ import (
 	"github.com/monccciii/graphforms/models"
 	"go.mongodb.org/mongo-driver/bson"
 )
-
 func GetResponses(c *gin.Context) {
-	client, ctx, cancel, err := db.ConnectMongo()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	defer client.Disconnect(ctx)
-	defer cancel()
+    client, ctx, cancel, err := db.ConnectMongo()
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    defer client.Disconnect(ctx)
+    defer cancel()
 
-	var id int
-	if err := json.NewDecoder(c.Request.Body).Decode(&id); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+    var id struct {
+        ID string `json:"id"`
+    }
+    if err := json.NewDecoder(c.Request.Body).Decode(&id); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
-	var responses []models.FormSub
-	if err := client.Database("graphforms").Collection("formsubmissions").FindOne(context.TODO(), bson.D{{"id", id}}).Decode(&responses); err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Submissions not found"})
-		return
-	}
+    var responses []models.FormSub
+    cursor, err := client.Database("graphforms").Collection("formsubmissions").Find(context.TODO(), bson.D{{"id", id.ID}})
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    defer cursor.Close(context.Background())
 
-	c.JSON(http.StatusOK, responses)
+    for cursor.Next(context.Background()) {
+        var formSub models.FormSub
+        if err := cursor.Decode(&formSub); err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        responses = append(responses, formSub)
+    }
+    if err := cursor.Err(); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, responses)
 }
