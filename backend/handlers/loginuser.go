@@ -33,7 +33,7 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 	if user.Password != models.LoginDetails.Password {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect password"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect username or password"})
 		return
 	}
 
