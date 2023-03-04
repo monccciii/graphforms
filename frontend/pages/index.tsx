@@ -1,18 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Landing() {
-  const url = process.env.NEXT_PUBLIC_API_URL
-  const [counter, setCounter] = useState(0);
-
-  function register() {
-    
-  }
-  useEffect(() => {
-    console.log(url);
-  }, []);
-  
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  const router = useRouter();
 
   return (
     <>
@@ -23,16 +16,18 @@ export default function Landing() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='bg-white h-[100vh]'>
-        <div className='p-5 bg-slate-200 w-full'>
-        <h1 className='text-left text-black text-3xl'>Graphforms</h1>
+        <div className='p-5 bg-black w-full'>
+        <p className='font-bold text-white text-2xl'>GraphForms</p>
 
         </div>
-=        <p className='text-center text-black text-xl'>
-          No! test2
+=        <p className='text-center text-black text-xl'>Register or Login
         </p>
         <div className='flex'>
-          <button className='mx-auto bg-blue-500 font-bold' onClick={() => setCounter(counter + 1)}>{counter}</button>
-        </div>
+            <div className='mx-auto space-x-2'>
+              <button className='bg-blue-500 p-5 text-white' onClick={() => router.push('/register')}>Register</button>
+              <button className='bg-blue-500 p-5 text-white'>Login</button>
+            </div>
+          </div>
       </div>
     </>
   )
