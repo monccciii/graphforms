@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -20,19 +21,25 @@ func LoginUser(c *gin.Context) {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-
-	if err := c.ShouldBindJSON(&models.LoginDetails); err != nil {
+	// Bind request body to LoginDetails struct
+	var loginDetails models.LoginDetails
+	if err := c.ShouldBindJSON(&loginDetails); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 
-	// Check if the provided username and password match what's stored in the database
+	// Retrieve user with given username from the database
 	var user models.User
-	if err := client.Database("graphforms").Collection("users").FindOne(context.TODO(), bson.D{{"username", models.LoginDetails.Username}}).Decode(&user); err != nil {
+	if err := client.Database("graphforms").Collection("users").FindOne(context.TODO(), bson.D{{"username", loginDetails.Username}}).Decode(&user); err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Username not found"})
 		return
 	}
-	if user.Password != models.LoginDetails.Password {
+
+	// Hash the input password with the retrieved salt and compare with the hashed password in the database
+	hashedPassword := hashPassword(loginDetails.Password, user.Salt)
+	fmt.Println(user, loginDetails, hashedPassword)
+
+	if hashedPassword != user.Password {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect username or password"})
 		return
 	}

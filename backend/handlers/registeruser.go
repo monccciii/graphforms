@@ -2,6 +2,9 @@ package handlers
 
 import (
 	"context"
+	"crypto/rand"
+	"crypto/sha256"
+	"encoding/base64"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -32,7 +35,19 @@ func RegisterUser(c *gin.Context) {
 		return
 	}
 
-	// Insert new user
+	// Generate a random salt
+	salt, err := GenerateSalt()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate salt"})
+		return
+	}
+
+	// Hash the password with the salt
+	hashedPassword := hashPassword(newUser.Password, salt)
+
+	// Insert new user with salt and hashed password
+	newUser.Password = hashedPassword
+	newUser.Salt = salt
 	_, err = client.Database("graphforms").Collection("users").InsertOne(context.TODO(), newUser)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -41,3 +56,22 @@ func RegisterUser(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{"message": "User created"})
 }
+
+func GenerateSalt() (string, error) {
+	// Generate a 16-byte random salt
+	salt := make([]byte, 16)
+	_, err := rand.Read(salt)
+	if err != nil {
+		return "", err
+	}
+
+	// Encode the salt as a base64 string
+	return base64.StdEncoding.EncodeToString(salt), nil
+}
+
+func hashPassword(password, salt string) string {
+    saltedPassword := []byte(password + salt)
+    hash := sha256.Sum256(saltedPassword)
+    return base64.StdEncoding.EncodeToString(hash[:])
+}
+

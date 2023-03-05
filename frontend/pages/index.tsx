@@ -25,7 +25,7 @@ export default function Landing() {
         <div className='flex'>
             <div className='mx-auto space-x-2'>
               <button className='bg-blue-500 p-5 text-white' onClick={() => router.push('/register')}>Register</button>
-              <button className='bg-blue-500 p-5 text-white'>Login</button>
+              <button className='bg-blue-500 p-5 text-white'onClick={() => router.push('/login')}>Login</button>
             </div>
           </div>
       </div>
