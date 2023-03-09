@@ -15,7 +15,7 @@ export default function Landing() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white px-20 sm:px-40'>
+      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white px-20 sm:px-[35]'>
         <div id='navbar' className='py-5 text-center text-black sm:flex sm:justify-between items-center'>
           <p className='text-xl sm:text-2xl font-medium'>GraphForms</p>
           <button onClick={()=>router.push('/register')} className='bg-black font-medium rounded-2xl text-white p-1 px-2 sm:p-2 sm:px-5 text-[13px] invisible sm:visible'>Sign up</button>
@@ -28,6 +28,59 @@ export default function Landing() {
             <div className='flex'>
               <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black text-sm text-white font-semibold rounded-[10px] inline-block px-3 sm:px-5 py-3'>First five forms free, sign up now!</button>
             </div>
+            <div className='mt-[50vh]'>
+              <p className='text-3xl sm:text-4xl font-bold'>Visualize data up to 100% faster than competitors.</p>
+            </div>
+            <div id='benefit1' className='mt-[30vh]'>
+              <div className='flex items-center'>
+                <div className='text-left mx-auto w-[30vw]'>
+                  <p className='text-3xl sm:text-2xl font-medium'>Real-time Data Visualization</p>
+                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Easily visualize your data using GraphForms’ online tool. No need to use any programs or input data into a tool. GraphForms takes care of it from start to finish.</p>
+                </div>
+                <div className='mx-auto'>
+                  <Image src='/fillerimg.png' alt='' height={250} width={500}/>
+                </div>
+              </div>
+            </div>
+            <div id='benefit2' className='mt-[30vh]'>
+              <div className='flex items-center'>
+              <div className='mx-auto'>
+                  <Image src='/fillerimg.png' alt='' height={250} width={500}/>
+                </div>
+                <div className='text-left mx-auto w-[30vw]'>
+                  <p className='text-3xl sm:text-2xl font-medium'>Simple Exports</p>
+                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Use your newly-collected data in machine learning models with GraphForms’ snappy CSV exports.</p>
+                </div>
+              </div>
+            </div>
+            <div id='benefit3' className='mt-[30vh]'>
+              <div className='flex items-center'>
+                <div className='text-left mx-auto w-[30vw]'>
+                  <p className='text-3xl sm:text-2xl font-medium'>Intuitive UI</p>
+                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Worry less about how to use GraphForms, and worry more about what’s important. GraphForms’ intuitively designed UI helps you work on what’s really important, your projects.</p>
+                </div>
+                <div className='mx-auto'>
+                  <Image src='/fillerimg.png' alt='' height={250} width={500}/>
+                </div>
+              </div>
+            </div>
+            <div id='pricing' className='mt-[30vh]'>
+              <p className='text-3xl sm:text-5xl font-semibold'>View our pricing.</p>
+              <div className='mt-[5vh] bg-[#F0F0F0] h-[50vh]'>
+
+              </div>
+            </div>
+            <div id='getstarted' className='mt-[25vh]'>
+              <p className='font-semibold text-3xl'>Don't wait any longer.</p>
+              <p style={{fontFamily:"'Inter', sans-serif"}} className='mt-[5vh] font-bold text-4xl sm:text-5xl'>Get started with GraphForms today!</p>
+              <div className='flex'>
+                <button className='mt-[10vh] mx-auto bg-black py-3 px-5 rounded text-white font-semibold text-xl'>Sign up now!</button>
+              </div>
+            </div>
+
+        </div>
+        <div id='footer' className='mt-[30vh] bg-[#D9D9D9] h-[10vh]'>
+          
         </div>
       </div>
     </>
