@@ -15,7 +15,7 @@ export default function Landing() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={{fontFamily:"'Poppins',sans-serif"}} className='bg-white px-20 sm:px-[35]'>
+      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white px-20 sm:px-[35]'>
         <div id='navbar' className='py-5 text-center text-black sm:flex sm:justify-between items-center'>
           <p className='text-xl sm:text-2xl font-medium'>GraphForms</p>
           <button onClick={()=>router.push('/register')} className='bg-black font-medium rounded-2xl text-white p-1 px-2 sm:p-2 sm:px-5 text-[13px] invisible sm:visible'>Sign up</button>
