@@ -66,6 +66,8 @@ export default function Register() {
             <input onChange={(e)=>setUsername(e.target.value)} placeholder='username'></input>
             <input onChange={(e)=>setPassword(e.target.value)} placeholder='password'></input>
             <button className='bg-blue-500 p-5 text-white' onClick={() => register()}>Register</button>
+            <button className='bg-black p-5 text-white' onClick={() => router.push('/login')}>Want to login?</button>
+
             </div>
           </div>
       </div>

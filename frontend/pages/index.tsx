@@ -15,19 +15,20 @@ export default function Landing() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className='bg-white h-[100vh]'>
-        <div className='p-5 bg-black w-full'>
-        <p className='font-bold text-white text-2xl'>GraphForms</p>
-
+      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white h-[100vh] px-40'>
+        <div id='navbar' className='py-5 text-center text-black sm:flex sm:justify-between items-center'>
+          <p className='text-xl sm:text-2xl font-medium'>GraphForms</p>
+          <button onClick={()=>router.push('/register')} className='bg-black font-medium rounded-2xl text-white p-1 px-2 sm:p-2 sm:px-5 text-[13px] invisible sm:visible'>Sign up</button>
         </div>
-=        <p className='text-center text-black text-xl'>Register or Login
-        </p>
-        <div className='flex'>
-            <div className='mx-auto space-x-2'>
-              <button className='bg-blue-500 p-5 text-white' onClick={() => router.push('/register')}>Register</button>
-              <button className='bg-blue-500 p-5 text-white'onClick={() => router.push('/login')}>Login</button>
+        <div id='body' className='text-center'>
+            <p style={{lineHeight:'83px'}} className='mt-[15vh] font-bold text-3xl sm:text-6xl'>Simplify your data collection and visualization.</p>
+            <div className='flex'>
+              <p className='mx-auto mt-[5vh] font-medium text-xl sm:text-2xl w-[40vw]'>GraphForms is the place where data collection and data visualization meet.</p>
             </div>
-          </div>
+            <div className='flex'>
+              <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black text-white font-semibold rounded-[10px] inline-block px-5 py-3'>First five forms free, sign up now!</button>
+            </div>
+        </div>
       </div>
     </>
   )
