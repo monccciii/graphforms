@@ -44,7 +44,7 @@ export default function Register() {
     if (isRegistered) {
       router.push('/login');
     }
-  }, [isRegistered]);
+  }, [isRegistered, router]);
 
   return (
     <>
@@ -62,8 +62,18 @@ export default function Register() {
           <p className='font-medium text-5xl'>Register an account.</p>
           <div className='flex'>
             <div id='form' className='mx-auto mt-[10vh]'>
-              <input className='bg-[#F2F2F2] border-b border-black p-2 rounded-xl w-[25vw]' placeholder='Username'/><br></br>
-              <input className='mt-[5vh] border-b border-black bg-[#F2F2F2] p-2 rounded-xl w-[25vw]' placeholder='Password'/><br></br>
+            <input
+              className='bg-[#F2F2F2] border-b border-black p-2 rounded-xl w-[25vw]'
+              placeholder='Username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              className='mt-[5vh] border-b border-black bg-[#F2F2F2] p-2 rounded-xl w-[25vw]'
+              placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
               <button className='mt-[8vh] bg-black text-white text-[18px] rounded-xl py-1 px-10'>Register.</button>
             </div>
           </div>
