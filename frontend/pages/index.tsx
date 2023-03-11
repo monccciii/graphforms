@@ -105,7 +105,7 @@ export default function Landing() {
               </div>
             </div>
             <div id='getstarted' className='mt-[35vh]'>
-              <p className='font-semibold text-3xl'>Don't wait any longer.</p>
+              <p className='font-semibold text-3xl'>Don&apos;t wait any longer.</p>
               <p style={{fontFamily:"'Inter', sans-serif"}} className='mt-[5vh] font-bold text-4xl sm:text-5xl'>Get started with GraphForms today!</p>
               <div className='flex'>
                 <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black py-3 px-5 rounded text-white font-semibold text-xl'>Sign up now!</button>
