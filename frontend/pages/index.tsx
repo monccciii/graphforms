@@ -51,7 +51,7 @@ export default function Landing() {
                 </div>
                 <div className='text-left mx-auto w-[30vw]'>
                   <p className='text-xl sm:text-2xl font-medium'>Simple Exports</p>
-                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Use your newly-collected data in machine learning models with GraphForms’ snappy CSV exports.</p>
+                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Use your newly-collected data in machine learning models with GraphForms&apos; snappy CSV exports.</p>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ export default function Landing() {
               <div className='sm:flex items-center'>
                 <div className='text-left mx-auto w-[30vw]'>
                   <p className='text-xl sm:text-2xl font-medium'>Intuitive UI</p>
-                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Worry less about how to use GraphForms, and worry more about what’s important. GraphForms’ intuitively designed UI helps you work on what’s really important, your projects.</p>
+                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Worry less about how to use GraphForms, and worry more about what&apos;s important. GraphForms&apos; intuitively designed UI helps you work on what&apos;s really important, your projects.</p>
                 </div>
                 <div className='mx-auto'>
                   <Image src='/fillerimg.png' alt='' height={250} width={500}/>
