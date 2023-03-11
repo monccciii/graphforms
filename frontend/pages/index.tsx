@@ -37,7 +37,7 @@ export default function Landing() {
               <div className='sm:flex items-center'>
                 <div className='text-left mx-auto w-[30vw]'>
                   <p className='text-xl sm:text-2xl font-medium'>Real-time Data Visualization</p>
-                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Easily visualize your data using GraphForms’ online tool. No need to use any programs or input data into a tool. GraphForms takes care of it from start to finish.</p>
+                  <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Easily visualize your data using GraphForms&apos; online tool. No need to use any programs or input data into a tool. GraphForms takes care of it from start to finish.</p>
                 </div>
                 <div className='mx-auto'>
                   <Image src='/fillerimg.png' alt='' height={250} width={500}/>
