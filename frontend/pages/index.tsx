@@ -15,15 +15,16 @@ export default function Landing() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white px-20 sm:px-[35]'>
-        <div id='navbar' className='py-5 text-center text-black sm:flex sm:justify-between items-center'>
+      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
+        <div id='navbar' className='py-5 px-20 sm:px-[35] text-center text-black sm:flex sm:justify-between items-center'>
           <p className='text-xl sm:text-2xl font-medium'>GraphForms</p>
           <button onClick={()=>router.push('/register')} className='bg-black font-medium rounded-2xl text-white p-1 px-2 sm:p-2 sm:px-5 text-[13px] invisible sm:visible'>Sign up</button>
         </div>
         <div id='body' className='text-center'>
+          <div id='main' className='px-20 sm:px-[35]'>
             <p className='mt-[15vh] font-bold text-3xl sm:text-6xl'>Simplify your data collection and visualization.</p>
             <div className='flex'>
-              <p className='mx-auto mt-[5vh] font-medium text-xl sm:text-2xl w-[40vw]'>GraphForms is the place where data collection and data visualization meet.</p>
+              <p className='mx-auto mt-[5vh] font-medium text-[#444444] text-xl sm:text-2xl w-[40vw]'>GraphForms is the place where data collection and data visualization meet.</p>
             </div>
             <div className='flex'>
               <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black text-sm text-white font-semibold rounded-[10px] inline-block px-3 sm:px-5 py-3'>First five forms free, sign up now!</button>
@@ -31,7 +32,8 @@ export default function Landing() {
             <div className='mt-[50vh]'>
               <p className='text-3xl sm:text-4xl font-bold'>Visualize data up to 100% faster than competitors.</p>
             </div>
-            <div id='benefit1' className='mt-[30vh]'>
+          </div>
+            <div id='benefit1' className='px-20 sm:px-[35] mt-[30vh]'>
               <div className='sm:flex items-center'>
                 <div className='text-left mx-auto w-[30vw]'>
                   <p className='text-xl sm:text-2xl font-medium'>Real-time Data Visualization</p>
@@ -42,7 +44,7 @@ export default function Landing() {
                 </div>
               </div>
             </div>
-            <div id='benefit2' className='mt-[30vh]'>
+            <div id='benefit2' className='px-20 sm:px-[35] mt-[30vh]'>
               <div className='sm:flex items-center'>
               <div className='mx-auto'>
                   <Image src='/fillerimg.png' alt='' height={250} width={500}/>
@@ -53,7 +55,7 @@ export default function Landing() {
                 </div>
               </div>
             </div>
-            <div id='benefit3' className='mt-[30vh]'>
+            <div id='benefit3' className='px-20 sm:px-[35] mt-[30vh]'>
               <div className='sm:flex items-center'>
                 <div className='text-left mx-auto w-[30vw]'>
                   <p className='text-xl sm:text-2xl font-medium'>Intuitive UI</p>
@@ -64,17 +66,49 @@ export default function Landing() {
                 </div>
               </div>
             </div>
-            <div id='pricing' className='mt-[30vh]'>
+            <div id='pricing' className='mt-[50vh]'>
               <p className='text-3xl sm:text-5xl font-semibold'>View our pricing.</p>
-              <div className='mt-[5vh] bg-[#F0F0F0] h-[50vh]'>
-
+              <div id='overlap' className='mt-[10vh] bg-[#F0F0F0] py-5 sm:py-10 sm:flex'>
+                <div id='price1' className='mx-auto my-auto p-5 bg-white rounded-[15px] drop-shadow-xl w-1/2 sm:w-1/4 h-[90%]'>
+                  <p className='font-semibold text-xl'>Free</p>
+                  <p className='mt-[2vh] font-bold text-3xl'>$0</p>
+                  <p className='mt-[2vh] font-semibold text-[#7E7B7B] text-xl'>/month</p>
+                  <div className='mt-[30%] text-[#222222] font-medium'>
+                    <p>✓ 1 form a month</p>
+                    <p>✓ Visualization</p>
+                    <p>✓ Export to CSV</p>
+                    <button className='mt-[5vh] bg-black p-5 text-white rounded-xl'>Start now!</button>
+                  </div>
+                </div>
+                <div id='price2' className='mx-auto my-auto p-5 bg-white rounded-[15px] drop-shadow-xl w-1/2 mt-2 sm:mt-0 sm:w-1/4 h-[90%]'>
+                  <p className='font-semibold text-xl'>Basic</p>
+                  <p className='mt-[2vh] font-bold text-3xl'>$5</p>
+                  <p className='mt-[2vh] font-semibold text-[#7E7B7B] text-xl'>/month</p>
+                  <div className='mt-[30%] text-[#222222] font-medium'>
+                    <p>✓ 5 forms a month</p>
+                    <p>✓ Visualization</p>
+                    <p>✓ Export to CSV</p>
+                    <button className='mt-[5vh] bg-black p-5 text-white rounded-xl'>Buy.</button>
+                  </div>
+                </div>
+                <div id='price3' className='mx-auto my-auto p-5 bg-white rounded-[15px] drop-shadow-xl w-1/2 mt-2 sm:mt-0 sm:w-1/4 h-[90%]'>
+                  <p className='font-semibold text-xl'>Premium</p>
+                  <p className='mt-[2vh] font-bold text-3xl'>$15</p>
+                  <p className='mt-[2vh] font-semibold text-[#7E7B7B] text-xl'>/month</p>
+                  <div className='mt-[30%] text-[#222222] font-medium'>
+                    <p>✓ Unlimited forms</p>
+                    <p>✓ Visualization</p>
+                    <p>✓ Export to CSV</p>
+                    <button className='mt-[5vh] bg-black p-5 text-white rounded-xl'>Buy.</button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div id='getstarted' className='mt-[25vh]'>
+            <div id='getstarted' className='mt-[35vh]'>
               <p className='font-semibold text-3xl'>Don't wait any longer.</p>
               <p style={{fontFamily:"'Inter', sans-serif"}} className='mt-[5vh] font-bold text-4xl sm:text-5xl'>Get started with GraphForms today!</p>
               <div className='flex'>
-                <button className='mt-[10vh] mx-auto bg-black py-3 px-5 rounded text-white font-semibold text-xl'>Sign up now!</button>
+                <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black py-3 px-5 rounded text-white font-semibold text-xl'>Sign up now!</button>
               </div>
             </div>
 

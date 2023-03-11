@@ -54,22 +54,23 @@ export default function Register() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className='bg-white h-[100vh]'>
-        <div className='p-5 bg-black w-full'>
-        <p className='font-bold text-white text-2xl'>GraphForms</p>
-
+      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
+        <div id='navbar' className='flex text-center py-5'>
+          <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
-        <p className='text-center text-black text-xl'>
-        </p>
-        <div className='flex'>
-            <div className='mx-auto'>
-            <input onChange={(e)=>setUsername(e.target.value)} placeholder='username'></input>
-            <input onChange={(e)=>setPassword(e.target.value)} placeholder='password'></input>
-            <button className='bg-blue-500 p-5 text-white' onClick={() => register()}>Register</button>
-            <button className='bg-black p-5 text-white' onClick={() => router.push('/login')}>Want to login?</button>
-
+        <div id='body' className='mt-[10vh] text-center'>
+          <p className='font-medium text-5xl'>Register an account.</p>
+          <div className='flex'>
+            <div id='form' className='mx-auto mt-[10vh]'>
+              <input className='bg-[#F2F2F2] border-b border-black p-2 rounded-xl w-[25vw]' placeholder='Username'/><br></br>
+              <input className='mt-[5vh] border-b border-black bg-[#F2F2F2] p-2 rounded-xl w-[25vw]' placeholder='Password'/><br></br>
+              <button className='mt-[8vh] bg-black text-white text-[18px] rounded-xl py-1 px-10'>Register.</button>
             </div>
           </div>
+          <p className='mt-[1vh] font-medium text-center'>or</p>
+          <button onClick={()=>router.push('/login')}className='mt-[1vh] border border-black text-[15px] rounded-2xl py-1 px-6'>Login to your account.</button>
+        </div>
+  
       </div>
     </>
   )
