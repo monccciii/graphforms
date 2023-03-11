@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
   const backendUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -10,33 +12,44 @@ export default function Register() {
   const [password, setPassword] = useState<string>("");
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
-  function register() {
-    fetch(`http://${backendUrl}register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        Username: username,
-        Password: password
-      })
-    }).then(response => {
-      return response.json();
-    }).then(data => {
-      console.log(data);
-      setIsRegistered(true);
-    }).catch(error => {
-      console.error(error);
-    });
-  }
-  
-  async function fetchRoot() {
+  async function register(username: string, password: string) {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL;
     try {
-      const response = await fetch(`http://${backendUrl}conntest`);
-      const data = await response.json();
-      console.log(data);
+      const response = await fetch(`http://${backendUrl}register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          Username: username,
+          Password: password
+        })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        toast.success('Account successfully created!', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        setTimeout(()=>setIsRegistered(true), 1000)
+      } else {
+        console.error(response.status);
+        if (response.status==400){
+          toast.error('Account already exists!', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        }
+        else {
+          toast.error('An unknown error occurred, please try again.', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        }
+      }
     } catch (error) {
       console.error(error);
+      toast.error('An unknown error occurred, please try again.', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   }
 
@@ -55,6 +68,7 @@ export default function Register() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
+        <ToastContainer/>
         <div id='navbar' className='flex text-center py-5'>
           <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
@@ -67,14 +81,14 @@ export default function Register() {
               placeholder='Username'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
+            /><br></br>
             <input
               className='mt-[5vh] border-b border-black bg-[#F2F2F2] p-2 rounded-xl w-[25vw]'
               placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
-              <button className='mt-[8vh] bg-black text-white text-[18px] rounded-xl py-1 px-10'>Register.</button>
+            /><br></br>
+              <button onClick={()=>register(username, password)} className='mt-[8vh] bg-black text-white text-[18px] rounded-xl py-1 px-10'>Register.</button>
             </div>
           </div>
           <p className='mt-[1vh] font-medium text-center'>or</p>
