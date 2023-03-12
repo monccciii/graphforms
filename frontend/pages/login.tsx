@@ -15,7 +15,7 @@ export default function Login() {
   async function login(username: string, password: string) {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL;
     try {
-      const response = await fetch(`http://${backendUrl}login`, {
+      const response = await fetch(`${backendUrl}login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

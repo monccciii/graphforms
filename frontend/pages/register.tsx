@@ -15,7 +15,7 @@ export default function Register() {
   async function register(username: string, password: string) {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL;
     try {
-      const response = await fetch(`http://${backendUrl}register`, {
+      const response = await fetch(`${backendUrl}register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -27,7 +27,7 @@ export default function Landing() {
               <p className='mx-auto mt-[5vh] font-medium text-[#444444] text-xl sm:text-2xl w-[40vw]'>GraphForms is the place where data collection and data visualization meet.</p>
             </div>
             <div className='flex'>
-              <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black text-sm text-white font-semibold rounded-[10px] inline-block px-3 sm:px-5 py-3'>First five forms free, sign up now!</button>
+              <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black text-sm text-white font-semibold rounded-[10px] inline-block px-3 sm:px-5 py-3'>First form free, sign up now!</button>
             </div>
             <div className='mt-[50vh]'>
               <p className='text-3xl sm:text-4xl font-bold'>Visualize data up to 100% faster than competitors.</p>
