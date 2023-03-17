@@ -18,7 +18,7 @@ type Claims struct {
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.Request.URL.Path == "/register" || c.Request.URL.Path == "/login" {
+		if c.Request.URL.Path == "/register" || c.Request.URL.Path == "/login" || c.Request.URL.Path == "/conntest" {
 			c.Next()
 			return
 		}

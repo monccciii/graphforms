@@ -8,11 +8,12 @@ import (
 func SetupRoutes(router *gin.Engine) {
 	router.GET("/", handlers.Landing)
 	router.GET("/conntest", handlers.ConnectionTest)
-	router.POST("/viewForm", handlers.ViewForm)
-	router.POST("/createForm", handlers.CreateForm)
+	router.GET("/protectedconntest", handlers.ProtectedConnectionTest)
+	router.POST("/viewform", handlers.ViewForm)
+	router.POST("/createform", handlers.CreateForm)
 	router.POST("/register", handlers.RegisterUser)
 	router.POST("/login", handlers.LoginUser)
-	router.POST("/submitForm", handlers.SubmitForm)
-	router.POST("/getResponses", handlers.GetResponses)
-	router.POST("/createCsv", handlers.CreateCsv)
+	router.POST("/submitform", handlers.SubmitForm)
+	router.POST("/getresponses", handlers.GetResponses)
+	router.POST("/createcsv", handlers.CreateCsv)
 }
