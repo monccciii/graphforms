@@ -36,9 +36,15 @@ __Backend:__
   - Online model training and export. (?)
   
   
+  
+
 Preview:
   
 ![image](https://user-images.githubusercontent.com/44330082/226008201-bc1fd940-8ea8-435b-ab8e-e120ddb7a9f2.png)
+![image](https://user-images.githubusercontent.com/44330082/226009865-07b3efeb-bd59-405f-bdca-e9e93d7f1163.png)
+![image](https://user-images.githubusercontent.com/44330082/226010364-c2fc762e-82b6-4dc7-8b2f-78baef431da9.png)
+
+
 
   
 ### concept art:
