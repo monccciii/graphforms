@@ -22,7 +22,7 @@ export default function Landing() {
         </div>
         <div id='body' className='text-center'>
           <div id='main' className='px-20 sm:px-[35]'>
-            <p className='mt-[15vh] font-bold text-3xl sm:text-6xl'>Simplify your data collection and visualization.</p>
+            <p className='mt-[15vh] font-bold text-3xl sm:text-6xl'>Simplify your 🗃️data collection and 📊visualization.</p>
             <div className='flex'>
               <p className='mx-auto mt-[5vh] font-medium text-[#444444] text-xl sm:text-2xl w-[40vw]'>GraphForms is the place where data collection and data visualization meet.</p>
             </div>
