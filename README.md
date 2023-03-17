@@ -5,27 +5,28 @@ coming soon (mar-apr 2023)
 
 ### Technologies:
 __Frontend:__
-  - NextJS (Typescript)
-  - Docker 
-  - AWS Elastic Beanstalk
+  - __NextJS (Typescript)__
+  - __Docker__ 
+  - __AWS Elastic Beanstalk__
   - Redux
   - Toastify
   - Tailwind CSS
+
 __Backend:__
-  - Gin (Golang)
+  - __Gin (Golang)__
   - JWT
-  - AWS Elastic Beanstalk
-  - MongoDB
+  - __AWS Elastic Beanstalk__
+  - __MongoDB__
   
 ### Technical Features:
   - Developed authentication middleware to protect routes.
-  - Created a CI/CD pipeline to deploy site on AWS.
-  - Implemented tests to catch errors before deployment.
+  - Created a __CI/CD__ pipeline to deploy site on __AWS__.
+  - Wrote __tests__ to catch errors before deployment.
   - Hashing and salting of credentials.
   - JWT with expiration.
-  - Redux to persist tokens across pages.
+  - __Redux__ to persist tokens across pages.
   - CORS to prevent foreign origins and unused methods.
-  - Established typography and clear visual hierarchy to provide better UI/UX
+  - Established typography and clear visual hierarchy to provide better __UI/UX__.
   
 ### Site features (not all implemented):
   - Collection of form data.
