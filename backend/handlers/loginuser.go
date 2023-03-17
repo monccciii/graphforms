@@ -2,10 +2,13 @@ package handlers
 
 import (
 	"context"
-	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 	"github.com/monccciii/graphforms/db"
 	"github.com/monccciii/graphforms/models"
 	"go.mongodb.org/mongo-driver/bson"
@@ -37,13 +40,38 @@ func LoginUser(c *gin.Context) {
 
 	// Hash the input password with the retrieved salt and compare with the hashed password in the database
 	hashedPassword := hashPassword(loginDetails.Password, user.Salt)
-	fmt.Println(user, loginDetails, hashedPassword)
 
 	if hashedPassword != user.Password {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect username or password"})
 		return
 	}
 
-	// If the credentials are valid, return a success message
-	c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
+	// If the credentials are valid, generate a JWT token
+	token, err := generateToken(uuid.New().String(), loginDetails.Username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+
+	// Return the JWT token to the client
+	c.JSON(http.StatusOK, gin.H{"token": token})
+}
+
+func generateToken(id string, user string) (string, error) {
+	secretKey := []byte(os.Getenv("JWT_SECRET_KEY"))
+
+	// Create a new token object, specifying the signing method and the claims
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"uuid": id,
+		"user": user,
+		"exp":  time.Now().Add(time.Hour * 24).Unix(),
+	})
+
+	// Sign the token with the secret key
+	tokenString, err := token.SignedString(secretKey)
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
 }

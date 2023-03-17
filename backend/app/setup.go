@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/monccciii/graphforms/db"
+	"github.com/monccciii/graphforms/middleware"
 	"github.com/monccciii/graphforms/router"
 )
 
@@ -23,7 +24,7 @@ func SetupApp() error {
 	app := gin.Default()
 
 	app.Use(cors.New(cors.Config{AllowOrigins:[]string{os.Getenv("FRONTEND_URI")}, AllowMethods:[]string{"GET","POST"}, AllowHeaders: []string{"Content-Type"}}))
-
+	app.Use(middleware.AuthMiddleware())
 	router.SetupRoutes(app)
 	app.Run("0.0.0.0:80")
 	return nil
