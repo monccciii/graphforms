@@ -73,7 +73,7 @@ export default function Register() {
           <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
         <div id='body' className='mt-[10vh] text-center'>
-          <p className='font-medium text-5xl'>Register an account.</p>
+          <p className='font-semibold text-5xl'>Register an account.</p>
           <div className='flex'>
             <div id='form' className='mx-auto mt-[10vh]'>
             <input

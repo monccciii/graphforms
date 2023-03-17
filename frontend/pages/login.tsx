@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
+import { setToken, clearToken } from '../store/reducers/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
@@ -11,6 +13,9 @@ export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const count = useSelector((state: { count: number }) => state.count);
+  
 
   async function login(username: string, password: string) {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -28,6 +33,7 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        dispatch(setToken(data.token));
         toast.success('Successfully logged in!', {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -59,6 +65,7 @@ export default function Login() {
       const response = await fetch(`http://${backendUrl}conntest`);
       const data = await response.json();
       console.log(data);
+      
     } catch (error) {
       console.error(error);
     }
@@ -84,7 +91,7 @@ export default function Login() {
           <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
         <div id='body' className='mt-[10vh] text-center'>
-          <p className='font-medium text-5xl'>Welcome back.</p>
+          <p className='font-semibold text-5xl'>Welcome back.</p>
           <div className='flex'>
             <div id='form' className='mx-auto mt-[10vh]'>
               <input
