@@ -35,6 +35,12 @@ __Backend:__
   - AI form generation.
   - Online model training and export. (?)
   
+  
+Preview:
+  
+![image](https://user-images.githubusercontent.com/44330082/226008201-bc1fd940-8ea8-435b-ab8e-e120ddb7a9f2.png)
+
+  
 ### concept art:
 
 Original:
