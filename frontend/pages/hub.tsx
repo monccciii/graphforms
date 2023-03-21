@@ -3,7 +3,9 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
+import 'components/sidebar'
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from 'components/sidebar';
 
 export default function Hub() {
   const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
@@ -31,6 +33,7 @@ export default function Hub() {
       </Head>
       <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
         <ToastContainer/>
+        <Sidebar/>
         <div id='navbar' className='flex text-center py-5'>
           <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
