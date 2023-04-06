@@ -16,6 +16,10 @@ jobs:
       - name: Download dependencies
         run: cd backend && go mod download
 
+      - name: Create .env file
+        run: echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" > backend/.env
+
+
       - name: Start backend server
         run: cd backend && go run main.go
 
