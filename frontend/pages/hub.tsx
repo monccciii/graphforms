@@ -43,7 +43,7 @@ export default function Hub() {
               <div className='mx-auto w-1/2 border-t-2 border-b-2 py-10'>
                 <p className='text-xl text-left font-medium'>See what you can do with GraphForms.</p>
                 <div className='mt-4 text-left mb-5'>
-                  <button className='bg-black text-white font-medium py-2 px-4 rounded'>
+                  <button onClick={()=>router.push('/workspace')} className='bg-black text-white font-medium py-2 px-4 rounded'>
                     View your workspace
                   </button>
                 </div>
