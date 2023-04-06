@@ -85,6 +85,7 @@ export default function Register() {
             <input
               className='mt-[5vh] border-b border-black bg-[#F2F2F2] p-2 rounded-xl w-[25vw]'
               placeholder='Password'
+              type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             /><br></br>

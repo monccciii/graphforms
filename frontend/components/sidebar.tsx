@@ -24,7 +24,7 @@ function Sidebar() {
           >
             <div className="flex items-center justify-between p-4">
               <h1 className="text-lg font-bold leading-none">
-                <Link href="/">GraphForms</Link>
+                <Link href="/hub">GraphForms</Link>
               </h1>
               <div onClick={toggleSidebar} className="mt-2">
                 <FaBars  />
@@ -32,7 +32,7 @@ function Sidebar() {
             </div>
 
             <section className="px-4 py-6 space-y-6">
-              <button className="w-full bg-black text-white text-lg font-semibold py-2 rounded-full">
+              <button onClick={()=>router.push('/workspace/createform')} className="w-full bg-black text-white text-lg font-semibold py-2 rounded-full">
                 New Form
               </button>
               <div className="font-semibold space-y-8">
@@ -48,11 +48,11 @@ function Sidebar() {
                   <div className="w-4 h-4"></div>
                   <div>Updates</div>
                 </Link>
-                <Link href="/" className="flex items-center gap-4 hover:text-gray-900">
+                <Link href="/hub" className="flex items-center gap-4 hover:text-gray-900">
                   <div className="w-4 h-4"></div>
                   <div>Your Account</div>
                 </Link>
-                <Link href="/" className="flex items-center gap-4 hover:text-gray-900">
+                <Link href="/hub" className="flex items-center gap-4 hover:text-gray-900">
                   <div className="w-4 h-4"></div>
                   <div>Settings</div>
                 </Link>

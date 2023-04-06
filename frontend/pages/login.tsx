@@ -37,6 +37,7 @@ export default function Login() {
         toast.success('Successfully logged in!', {
           position: toast.POSITION.TOP_RIGHT
         });
+        setTimeout(()=>router.push('/hub'), 1500)
       } else {
         console.error(response.status);
         if (response.status==401){
@@ -103,6 +104,7 @@ export default function Login() {
               <input
                 className='mt-[5vh] border-b border-black bg-[#F2F2F2] p-2 rounded-xl w-[25vw]'
                 placeholder='Password'
+                type='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               /><br></br>

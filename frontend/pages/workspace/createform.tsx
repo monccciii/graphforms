@@ -38,7 +38,7 @@ export default function Createform() {
         <div id='body' className='mt-[10vh] px-[25%] text-center'>
             <input className='text-3xl sm:text-5xl text-center font-bold' placeholder='Form title'></input><br/>
             <textarea
-              className='w-full text-xl text-slate-500 text-center font-bold mb-5'
+              className='w-full text-xl text-slate-500 text-center font-semibold mb-5'
               placeholder='Form description'
               rows={3}
             ></textarea>
@@ -50,7 +50,7 @@ export default function Createform() {
                 </div>
               ))}
             </div>
-            <button onClick={()=>setNumofqs(numofqs+1)} className="bg-black  text-white font-bold py-2 px-4 rounded mt-4">
+            <button onClick={()=>setNumofqs(numofqs+1)} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
               +
             </button>
         </div>

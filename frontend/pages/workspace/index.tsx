@@ -37,7 +37,9 @@ export default function Workspace() {
           <p onClick={()=>router.push('/hub')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
         <div id='body' className='mt-[10vh] text-center'>
-          <p className='text-center font-bold text-3xl'>My forms</p>
+          <p className='text-center font-bold text-4xl'>My forms.</p>
+          <p className='text-center text-[#444444] mb-10 font-medium text-xl'>Create new forms or view older forms here.</p>
+
           <div className='flex'>
             <div className='mx-auto border-slate-300 border-t-2 border-b-2 mb-5 w-1/2'>
             {/* insert code for retrieving all forms by user*/}
