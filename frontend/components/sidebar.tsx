@@ -26,8 +26,8 @@ function Sidebar() {
               <h1 className="text-lg font-bold leading-none">
                 <Link href="/">GraphForms</Link>
               </h1>
-              <div className="mt-2">
-                <FaBars onClick={toggleSidebar} />
+              <div onClick={toggleSidebar} className="mt-2">
+                <FaBars  />
               </div>
             </div>
 
@@ -36,15 +36,15 @@ function Sidebar() {
                 New Form
               </button>
               <div className="font-semibold space-y-8">
-                <Link href="/" className="flex items-center gap-4 hover:text-gray-900">
+                <Link href="/hub" className="flex items-center gap-4 hover:text-gray-900">
                   <div className="w-4 h-4"></div>
                   <div>Hub</div>
                 </Link>
-                <Link href="/" className="flex items-center gap-4 hover:text-gray-900">
+                <Link href="/workspace" className="flex items-center gap-4 hover:text-gray-900">
                   <div className="w-4 h-4"></div>
                   <div>Workspace</div>
                 </Link>
-                <Link href="/" className="flex items-center gap-4 hover:text-gray-900">
+                <Link href="/updates" className="flex items-center gap-4 hover:text-gray-900">
                   <div className="w-4 h-4"></div>
                   <div>Updates</div>
                 </Link>

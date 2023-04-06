@@ -6,8 +6,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from 'components/sidebar';
 
-export default function Workspace() {
+export default function Createform() {
   const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
+  const [numofqs, setNumofqs] = useState<number>(1)
   const router = useRouter();
 
   async function fetchRoot() {
@@ -19,8 +20,6 @@ export default function Workspace() {
       console.error(error);
     }
   }
-
- 
 
   return (
     <>
@@ -36,15 +35,24 @@ export default function Workspace() {
         <div id='navbar' className='flex text-center py-5'>
           <p onClick={()=>router.push('/hub')} className='mx-auto font-medium text-xl'>GraphForms</p>
         </div>
-        <div id='body' className='mt-[10vh] text-center'>
-          <p className='text-center font-bold text-3xl'>My forms</p>
-          <div className='flex'>
-            <div className='mx-auto border-slate-300 border-t-2 border-b-2 mb-5 w-1/2'>
-            {/* insert code for retrieving all forms by user*/}
-            <p>test</p>
+        <div id='body' className='mt-[10vh] px-[25%] text-center'>
+            <input className='text-3xl sm:text-5xl text-center font-bold' placeholder='Form title'></input><br/>
+            <textarea
+              className='w-full text-xl text-slate-500 text-center font-bold mb-5'
+              placeholder='Form description'
+              rows={3}
+            ></textarea>
+            <div id='form' className='text-center'>
+              {Array.from({ length: numofqs }, (_, i) => (
+                <div key={i} className='flex text-2xl font-bold'>
+                    <p>{i+1}.</p>
+                    <input className='text-2xl ml-5 font-semibold' placeholder='Ask a question.'></input>
+                </div>
+              ))}
             </div>
-          </div>
-            <button onClick={()=>router.push('/workspace/createform')} className='bg-black px-2 py-5 rounded-xl text-white w-1/2 font-semibold'>Create a new form.</button>
+            <button onClick={()=>setNumofqs(numofqs+1)} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
+              +
+            </button>
         </div>
       </div>
     </>
