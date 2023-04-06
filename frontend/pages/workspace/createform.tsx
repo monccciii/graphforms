@@ -50,7 +50,7 @@ export default function Createform() {
                 </div>
               ))}
             </div>
-            <button onClick={()=>setNumofqs(numofqs+1)} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
+            <button onClick={()=>setNumofqs(numofqs+1)} className="bg-black  text-white font-bold py-2 px-4 rounded mt-4">
               +
             </button>
         </div>

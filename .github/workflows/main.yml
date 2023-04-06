@@ -17,7 +17,7 @@ jobs:
         run: cd backend && go mod download
 
       - name: Start backend server
-        run: cd backend && go run main.go &
+        run: cd backend && go run main.go
 
       - name: Run tests
         run: cd tests/backend && go mod init github.com/monccciii/graphforms/test && go test -v
