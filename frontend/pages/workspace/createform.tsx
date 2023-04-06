@@ -1,24 +1,57 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from 'components/sidebar';
 
-export default function Createform() {
-  const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
-  const [numofqs, setNumofqs] = useState<number>(1)
-  const router = useRouter();
+//fix local storage issues im taking a break
 
-  async function fetchRoot() {
-    try {
-      const response = await fetch(`http://${backendUrl}conntest`);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+export default function Createform() {
+  const [questionCount, setQuestionCount] = useState(1);
+  const [creator, setCreator] = useState<String>('');
+  const [formname, setFormname] = useState<String>('');
+  const [description, setDescription] = useState<String>('');
+  const [formData, setFormData] = useState<any[]>([
+    { question: '', type: 'text', options: [] },
+  ]);
+
+  const router = useRouter();
+  if (typeof window !== 'undefined') {
+      const username = localStorage.getItem("username")
+  }
+
+  function addQuestion() {
+    setFormData([...formData, { question: '', type: 'text', options: [] }]);
+    setQuestionCount(questionCount + 1);
+  }
+
+  function updateFormData(index: number, field: string, value: any) {
+    const updatedFormData = [...formData];
+    updatedFormData[index][field] = value;
+    setFormData(updatedFormData);
+  }
+
+  function updateOption(index: number, optionIndex: number, value: string) {
+    const updatedFormData = [...formData];
+    updatedFormData[index].options[optionIndex] = value;
+    setFormData(updatedFormData);
+  }
+
+  function addOption(index: number) {
+    const updatedFormData = [...formData];
+    updatedFormData[index].options.push('');
+    setFormData(updatedFormData);
+  }
+
+  function storeData() {
+    const dataToStore = {
+      creator: creator,
+      name: formname,
+      description: description,
+      questions: formData,
+    };
+    console.log(dataToStore);
   }
 
   return (
@@ -29,32 +62,67 @@ export default function Createform() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
-        <ToastContainer/>
-        <Sidebar/>
-        <div id='navbar' className='flex text-center py-5'>
-          <p onClick={()=>router.push('/hub')} className='mx-auto font-medium text-xl'>GraphForms</p>
+      <div style={{ fontFamily: "'Poppins', sans-serif" }} className="bg-white">
+        <ToastContainer />
+        <Sidebar />
+        <div id="navbar" className="flex text-center py-5">
+          <p onClick={() => router.push('/hub')} className="mx-auto font-medium text-xl">
+            GraphForms
+          </p>
         </div>
-        <div id='body' className='mt-[10vh] px-[25%] text-center'>
-            <input className='text-3xl sm:text-5xl text-center font-bold' placeholder='Form title'></input><br/>
-            <textarea
-              className='w-full text-xl text-slate-500 text-center font-semibold mb-5'
-              placeholder='Form description'
-              rows={3}
-            ></textarea>
-            <div id='form' className='text-center'>
-              {Array.from({ length: numofqs }, (_, i) => (
-                <div key={i} className='flex text-2xl font-bold'>
-                    <p>{i+1}.</p>
-                    <input className='text-2xl ml-5 font-semibold' placeholder='Ask a question.'></input>
-                </div>
-              ))}
+        <div id="body" className="mt-[10vh] px-[25%] text-center">
+          <input className="text-3xl sm:text-5xl text-center font-bold" placeholder="Form title" onChange={(e) => setFormname(e.target.value)}></input>
+          <br />
+          <p className="text-xl text-slate-500 text-center font-semibold mb-5">By: {username}</p>
+          <br />
+          <textarea
+            className="w-full text-xl text-slate-500 text-center font-semibold mb-5"
+            placeholder="Form description"
+            onChange={(e) => setDescription(e.target.value)}
+            rows={3}
+          ></textarea>
+          {[...Array(questionCount)].map((_, i) => (
+            <div key={i} className="flex text-2xl font-bold">
+              <button onClick={addQuestion} className="bg-black text-white font-bold py-2 px-4 rounded mr-4">
+                +
+              </button>
+              <p>{i + 1}.</p>
+              <input
+                className="text-2xl ml-5 font-semibold"
+                placeholder="Ask a question."
+                value={formData[i].question}
+                onChange={(e) => updateFormData(i, 'question', e.target.value)}
+              ></input>
+              <select
+                value={formData[i].type}
+                onChange={(e) => updateFormData(i, 'type', e.target.value)}
+                className="ml-4"
+              >
+                <option value="text">Text</option>
+                <option value="choice">Multiple Choice</option>
+              </select>
+              {formData[i].type === 'choice' &&
+                formData[i].options.map((_:any, optionIndex:any) => (
+                  <div key={optionIndex}>
+                    <input
+                      value={formData[i].options[optionIndex]}
+                      onChange={(e) => updateOption(i, optionIndex, e.target.value)}
+                      placeholder={`Option ${optionIndex + 1}`}
+                    />
+                  </div>
+                ))}
+              {formData[i].type === 'choice' && (
+                <button onClick={() => addOption(i)} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
+                  Add Option
+                </button>
+              )}
             </div>
-            <button onClick={()=>setNumofqs(numofqs+1)} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
-              +
-            </button>
+          ))}
+          <button onClick={storeData} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
+            Store Data
+          </button>
         </div>
       </div>
     </>
-  )
-}
+);
+}    

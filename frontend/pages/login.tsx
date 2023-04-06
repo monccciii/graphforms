@@ -1,9 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
-import { setToken, clearToken } from '../store/reducers/authSlice';
+import { setToken } from '../store/reducers/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,7 +13,6 @@ export default function Login() {
   const [password, setPassword] = useState<string>("");
   const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const count = useSelector((state: { count: number }) => state.count);
   
 
   async function login(username: string, password: string) {
@@ -37,6 +35,7 @@ export default function Login() {
         toast.success('Successfully logged in!', {
           position: toast.POSITION.TOP_RIGHT
         });
+        localStorage.setItem('username', username);
         setTimeout(()=>router.push('/hub'), 1500)
       } else {
         console.error(response.status);
