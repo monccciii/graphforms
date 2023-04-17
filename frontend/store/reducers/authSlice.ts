@@ -16,9 +16,12 @@ const authSlice = createSlice({
       state.token = null
       console.log(state.token)
     },
+    viewToken(state) {
+      console.log(state.token)
+    }
   },
 })
 
-export const { setToken, clearToken } = authSlice.actions
+export const { setToken, clearToken, viewToken } = authSlice.actions
 
 export default authSlice.reducer

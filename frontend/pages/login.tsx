@@ -2,8 +2,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
-import { setToken } from '../store/reducers/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
@@ -12,7 +10,6 @@ export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
-  const dispatch = useDispatch();
   
 
   async function login(username: string, password: string) {
@@ -30,8 +27,9 @@ export default function Login() {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        dispatch(setToken(data.token));
+        if (typeof window !== 'undefined') {
+          localStorage.setItem("token", data.token)
+        }
         toast.success('Successfully logged in!', {
           position: toast.POSITION.TOP_RIGHT
         });

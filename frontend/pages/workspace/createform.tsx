@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from 'components/sidebar';
 
-//fix local storage issues im taking a break
 
 export default function Createform() {
   const [questionCount, setQuestionCount] = useState(1);
@@ -15,7 +14,6 @@ export default function Createform() {
   const [formData, setFormData] = useState<any[]>([
     { question: '', type: 'text', options: [] },
   ]);
-
   const router = useRouter();
 
   function addQuestion() {
@@ -41,14 +39,58 @@ export default function Createform() {
     setFormData(updatedFormData);
   }
 
-  function storeData() {
+  async function storeData() {
     const dataToStore = {
       creator: creator,
       name: formname,
       description: description,
       questions: formData,
     };
-    console.log(dataToStore);
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL;
+    let token = null;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    try {
+      const response = await fetch(`${backendUrl}createform`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(dataToStore),
+      });
+  
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        // Handle the response, such as showing a success message or redirecting to another page
+        toast.success('Form successfully created!', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        // Redirect or perform any other action on success
+      } else {
+        console.error(response.status);
+        if (response.status == 400) {
+          toast.error('Invalid form data!', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        } else if (response.status == 401) {
+          toast.error('Unauthorized access!', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        } else {
+          toast.error('An unknown error occurred, please try again.', {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred while sending the request, please try again.', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
   }
 
   useEffect(() => {
@@ -74,7 +116,7 @@ export default function Createform() {
             GraphForms
           </p>
         </div>
-        <div id="body" className="mt-[10vh] px-[25%] text-center">
+        <div id="body" className="mt-[10vh] px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 text-center">
           <input className="text-3xl sm:text-5xl text-center font-bold" placeholder="Form title" onChange={(e) => setFormname(e.target.value)}></input>
           <br />
           <p className="text-xl text-slate-500 text-center font-semibold mb-5">By: {creator}</p>
@@ -87,47 +129,54 @@ export default function Createform() {
           ></textarea>
           {[...Array(questionCount)].map((_, i) => (
             <div key={i} className="text-2xl font-bold">
-              <div className='flex'>
-                <p>{i + 1}.</p>
-                <input
-                  className="text-2xl ml-5 font-semibold"
-                  placeholder="Ask a question..."
-                  value={formData[i].question}
-                  onChange={(e) => updateFormData(i, 'question', e.target.value)}
-                ></input>
-              </div>
-              <div className='text-left'>
-                <select
-                  value={formData[i].type}
-                  onChange={(e) => updateFormData(i, 'type', e.target.value)}
-                  className="ml-4"
-                >
-                  <option value="text">Text</option>
-                  <option value="choice">Multiple Choice</option>
-                </select>
-              </div>
-              {formData[i].type === 'choice' &&
-                formData[i].options.map((_:any, optionIndex:any) => (
-                  <div className='ml-5 text-left' key={optionIndex}>
-                    <input
-                      value={formData[i].options[optionIndex]}
-                      onChange={(e) => updateOption(i, optionIndex, e.target.value)}
-                      placeholder={`Option ${optionIndex + 1}`}
-                    />
-                  </div>
-                ))}
-              {formData[i].type === 'choice' && (
-                <button onClick={() => addOption(i)} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
-                  Add Option
-                </button>
-              )}
-            </div>
+  <div className='flex'>
+    <p>{i + 1}.</p>
+    <input
+      className="text-2xl ml-5 font-semibold"
+      placeholder="Ask a question..."
+      value={formData[i].question}
+      onChange={(e) => updateFormData(i, 'question', e.target.value)}
+    ></input>
+  </div>
+  <div className='text-left'>
+    <select
+      value={formData[i].type}
+      onChange={(e) => updateFormData(i, 'type', e.target.value)}
+      className="text-sm font-regular ml-4"
+    >
+      <option value="text">Text</option>
+      <option value="choice">Multiple Choice</option>
+    </select>
+  </div>
+  <div className="flex flex-col">
+    {formData[i].type === 'choice' &&
+      formData[i].options.map((_: any, optionIndex: any) => (
+        <div className='flex items-center ml-5 text-left' key={optionIndex}>
+          <div className='border border-slate-800 mr-1 rounded-2xl h-2 w-2'></div>
+          <input
+            value={formData[i].options[optionIndex]}
+            onChange={(e) => updateOption(i, optionIndex, e.target.value)}
+            placeholder={`Option ${optionIndex + 1}`}
+            className='text-sm font-semibold'
+          />
+        </div>
+      ))}
+    {formData[i].type === 'choice' && (
+      <div className="mb-5">
+        <button onClick={() => addOption(i)} className="bg-black text-white font-bold text-sm py-1 px-2 rounded mt-4">
+          Add Option
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+
           ))}
              <button onClick={addQuestion} className="bg-black text-white font-bold py-2 px-4 rounded mr-4">
                 +
               </button>
           <button onClick={storeData} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
-            Store Data
+            Create Form
           </button>
         </div>
       </div>

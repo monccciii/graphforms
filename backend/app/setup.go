@@ -23,7 +23,11 @@ func SetupApp() error {
 	
 	app := gin.Default()
 
-	app.Use(cors.New(cors.Config{AllowOrigins:[]string{os.Getenv("FRONTEND_URI")}, AllowMethods:[]string{"GET","POST"}, AllowHeaders: []string{"Content-Type"}}))
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: []string{os.Getenv("FRONTEND_URI")},
+		AllowMethods: []string{"GET", "POST"},
+		AllowHeaders: []string{"Content-Type", "Authorization"},
+	}))	
 	app.Use(middleware.AuthMiddleware())
 	router.SetupRoutes(app)
 	app.Run("0.0.0.0:80")
