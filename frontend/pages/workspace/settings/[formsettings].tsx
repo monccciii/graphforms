@@ -79,12 +79,12 @@ export default function FormSettings() {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
   
-        toast.success("CSV created and downloaded successfully!", {
+        toast.success("Exported CSV!", {
           position: toast.POSITION.TOP_RIGHT,
         });
       } else {
         console.error(response.status);
-        toast.error("An error occurred while creating the CSV. Please try again.", {
+        toast.error("An error occurred while exporting the CSV. Please try again.", {
           position: toast.POSITION.TOP_RIGHT,
         });
       }
