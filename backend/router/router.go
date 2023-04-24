@@ -16,4 +16,6 @@ func SetupRoutes(router *gin.Engine) {
 	router.POST("/submitform", handlers.SubmitForm)
 	router.POST("/getresponses", handlers.GetResponses)
 	router.POST("/createcsv", handlers.CreateCsv)
+	router.POST("/yourforms", handlers.YourForms)
+
 }

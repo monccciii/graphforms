@@ -3,16 +3,16 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
-import { setToken, clearToken } from '../store/reducers/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import 'components/sidebar'
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from 'components/sidebar';
+import Navbar from '@/components/navbar';
 
-export default function Test() {
+export default function EditForm() {
   const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
   const router = useRouter();
-  const dispatch = useDispatch();
-  const count = useSelector((state: { count: number }) => state.count);
-  
+  const { form } = router.query;
+
 
   return (
     <>
@@ -24,14 +24,10 @@ export default function Test() {
       </Head>
       <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
         <ToastContainer/>
-        <div id='navbar' className='flex text-center py-5'>
-          <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
-        </div>
+        <Sidebar/>
+        <Navbar />
         <div id='body' className='mt-[10vh] text-center'>
-            <p>Graphforms test</p>
-            <button onClick={() => dispatch(setToken('my_token'))}>Set Token</button>
-            &nbsp;
-            <button onClick={() => dispatch(clearToken())}>Clear Token</button>
+
         </div>
       </div>
     </>

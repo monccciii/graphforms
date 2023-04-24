@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '@/components/navbar';
 
 export default function Login() {
   const backendUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -56,18 +57,6 @@ export default function Login() {
       console.error(error);
     }
   }
-  
-  
-  async function fetchRoot() {
-    try {
-      const response = await fetch(`http://${backendUrl}conntest`);
-      const data = await response.json();
-      console.log(data);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   useEffect(() => {
     if (isLoggedin) {
@@ -85,9 +74,7 @@ export default function Login() {
       </Head>
       <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
         <ToastContainer/>
-        <div id='navbar' className='flex text-center py-5'>
-          <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
-        </div>
+        <Navbar />
         <div id='body' className='mt-[10vh] text-center'>
           <p className='font-semibold text-5xl'>Welcome back.</p>
           <div className='flex'>

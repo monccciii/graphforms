@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from 'components/sidebar';
+import Navbar from '@/components/navbar';
 
 
 export default function Createform() {
@@ -111,11 +112,7 @@ export default function Createform() {
       <div style={{ fontFamily: "'Poppins', sans-serif" }} className="bg-white">
         <ToastContainer />
         <Sidebar />
-        <div id="navbar" className="flex text-center py-5">
-          <p onClick={() => router.push('/hub')} className="mx-auto font-medium text-xl">
-            GraphForms
-          </p>
-        </div>
+        <Navbar />
         <div id="body" className="mt-[10vh] px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 text-center">
           <input className="text-3xl sm:text-5xl text-center font-bold" placeholder="Form title" onChange={(e) => setFormname(e.target.value)}></input>
           <br />

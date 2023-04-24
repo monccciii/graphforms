@@ -1,27 +1,48 @@
+//@ts-nocheck
 import Head from 'next/head';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from 'components/sidebar';
+import Link from 'next/link';
+import Navbar from '@/components/navbar';
 
 export default function Workspace() {
   const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
   const router = useRouter();
+  const [forms, setForms] = useState();
 
-  async function fetchRoot() {
-    try {
-      const response = await fetch(`http://${backendUrl}conntest`);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+  async function fetchForms() {
+  let token = null;
+  let username = null;
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+    username = localStorage.getItem('username');
   }
+  try {
+    const response = await fetch(`${backendUrl}yourforms`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username
+      })
+    });
+    const data = await response.json();
+    console.log(data);
+    setForms(data);
+  } catch (error) {
+    console.error(error)
+  }
+}
 
+useEffect(()=>{
+  fetchForms()
+}, [])
  
-
   return (
     <>
       <Head>
@@ -30,25 +51,35 @@ export default function Workspace() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
-        <ToastContainer/>
-        <Sidebar/>
-        <div id='navbar' className='flex text-center py-5'>
-          <p onClick={()=>router.push('/hub')} className='mx-auto font-medium text-xl'>GraphForms</p>
-        </div>
-        <div id='body' className='mt-[10vh] text-center'>
-          <p className='text-center font-bold text-4xl'>My forms.</p>
-          <p className='text-center text-[#444444] mb-10 font-medium text-xl'>Create new forms or view older forms here.</p>
+      <div style={{ fontFamily: "'Poppins', sans-serif" }} className="bg-white">
+        <ToastContainer />
+        <Sidebar />
+        <Navbar />
+        <div id="body" className="mt-[10vh] text-center">
+          <p className="text-center font-bold text-4xl">My forms.</p>
+          <p className="text-center text-[#444444] mb-10 font-medium text-xl">
+            Create new forms or view older forms here.
+          </p>
+          <button
+            onClick={() => router.push('/workspace/createform')}
+            className="bg-black px-2 py-5 rounded-xl text-white w-1/2 font-semibold mb-5"
+          >
+            Create a new form.
+          </button>
 
-          <div className='flex'>
-            <div className='mx-auto border-slate-300 border-t-2 border-b-2 mb-5 w-1/2'>
-            {/* insert code for retrieving all forms by user*/}
-            <p>test</p>
-            </div>
-          </div>
-            <button onClick={()=>router.push('/workspace/createform')} className='bg-black px-2 py-5 rounded-xl text-white w-1/2 font-semibold'>Create a new form.</button>
+          <div className="flex justify-center">
+                <div className="mb-2 grid grid-cols-4 gap-4 w-1/2">
+                  {forms && forms.forms.map((form: any) => (
+                    <div key={form.id} className="border border-gray-300 p-4 mb-4 rounded">
+                      <h2 className="text-xl font-bold">{form.name}</h2>
+                      <div onClick={()=>router.push(`/viewform/${form.id}`)} className='rounded text-sm bg-blue-500 text-white inline-block px-2 py-1'>View</div>
+                      <div onClick={()=>router.push(`/workspace/settings/${form.id}`)}  className='rounded text-sm bg-slate-800 text-white inline-block px-2 py-1'>Settings</div>
+                    </div> 
+                  ))}
+                </div>
+              </div>
+          
         </div>
       </div>
-    </>
-  )
-}
+   </>
+  )}

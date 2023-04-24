@@ -77,7 +77,7 @@ export default function Landing() {
                     <p>✓ 1 form a month</p>
                     <p>✓ Visualization</p>
                     <p>✓ Export to CSV</p>
-                    <button className='mt-[5vh] bg-black p-5 text-white rounded-xl'>Start now!</button>
+                    <button onClick={()=>router.push('/hub')} className='mt-[5vh] bg-black p-5 text-white rounded-xl'>Start now!</button>
                   </div>
                 </div>
                 <div id='price2' className='mx-auto my-auto p-5 bg-white rounded-[15px] drop-shadow-xl w-1/2 mt-2 sm:mt-0 sm:w-1/4 h-[90%]'>

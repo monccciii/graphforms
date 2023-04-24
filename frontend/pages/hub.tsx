@@ -6,23 +6,12 @@ import { ToastContainer } from 'react-toastify';
 import 'components/sidebar'
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from 'components/sidebar';
+import Navbar from '@/components/navbar';
 
 export default function Hub() {
   const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
   const router = useRouter();
-
-  async function fetchRoot() {
-    try {
-      const response = await fetch(`http://${backendUrl}conntest`);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
  
-
   return (
     <>
       <Head>
@@ -34,9 +23,7 @@ export default function Hub() {
       <div style={{fontFamily:"'Poppins', sans-serif"}} className='bg-white'>
         <ToastContainer/>
         <Sidebar/>
-        <div id='navbar' className='flex text-center py-5'>
-          <p onClick={()=>router.push('/')} className='mx-auto font-medium text-xl'>GraphForms</p>
-        </div>
+        <Navbar />
         <div id='body' className='mt-[10vh] text-center'>
             <p className='font-bold text-3xl sm:text-5xl mb-5'>GraphForms Hub</p>
             <div className='flex mb-20'>

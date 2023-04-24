@@ -5,9 +5,18 @@ import { useRouter } from 'next/router';
 export default function SimpleAuth({ children }) {
   const router = useRouter();
 
+  async function fetchRoot() {
+    try {
+      const response = await fetch(`http://${backendUrl}conntest`);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Ignore token check for "/" and "/register" routes
       if (router.pathname === '/' || router.pathname === '/register') {
         return;
       }
