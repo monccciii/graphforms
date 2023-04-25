@@ -16,16 +16,10 @@ export default function ViewForm() {
   const [responses, setResponses] = useState<any[]>([]);
 
   async function fetchFormData() {
-    let token = null   
-    if (typeof window !== 'undefined') {
-        token = localStorage.getItem('token');
-    }
-    
     try {
       const response = await fetch(`${backendUrl}viewform`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -48,16 +42,11 @@ export default function ViewForm() {
       timestamp: new Date(),
       questions: responses,
     };
-    let token = null;
-    if (typeof window !== 'undefined') {
-        token = localStorage.getItem('token');
-    }
     try {
         const response = await fetch(`${backendUrl}submitform`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify(dataToSubmit),
           });
