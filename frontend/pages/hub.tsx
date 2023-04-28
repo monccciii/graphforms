@@ -42,7 +42,7 @@ export default function Hub() {
                 </div>
               </div>
             </div>
-            <p className='font-semibold sm:text-4xl text-2xl'>Newest forms</p>
+            <p className='font-semibold sm:text-4xl text-2xl'>Recent forms</p>
             <div className='flex mb-20'>
               <div className='mx-auto w-1/2 border-t-2 border-b-2 py-10'>
               {/* Write code to grab all the forms created recently */}

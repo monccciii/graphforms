@@ -17,7 +17,7 @@ export default function SimpleAuth({ children }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (router.pathname === '/' || router.pathname === '/register') {
+      if (router.pathname === '/' || router.pathname === '/register' || router.pathname === '/viewform/[form]') {
         return;
       }
 

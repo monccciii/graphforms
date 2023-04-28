@@ -69,7 +69,7 @@ useEffect(()=>{
 
           <div className="flex justify-center">
                 <div className="mb-2 grid grid-cols-4 gap-4 w-1/2">
-                  {forms && forms.forms.map((form: any) => (
+                  {forms && forms.forms && forms.forms.map((form: any) => (
                     <div key={form.id} className="border border-gray-300 p-4 mb-4 rounded">
                       <h2 className="text-xl font-bold">{form.name}</h2>
                       <div onClick={()=>router.push(`/viewform/${form.id}`)} className='rounded text-sm bg-blue-500 text-white inline-block px-2 py-1'>View</div>

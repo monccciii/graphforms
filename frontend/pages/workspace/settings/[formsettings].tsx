@@ -121,10 +121,31 @@ export default function FormSettings() {
           {fetchedData && (
             <div>
               <p className='text-center font-medium text-[#444444] mb-4'>Settings for form:</p>
-              <h1 className='text-5xl font-semibold border-b-2'>{fetchedData.name}</h1>
-              <button onClick={createCSV} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
-              Create CSV
-              </button>
+              <h1 className='text-5xl font-semibold'>{fetchedData.name}</h1>
+              <div className='flex'>
+                <div className='mx-auto w-1/2 border-b-4 mb-5'></div>
+              </div>
+              <div className='flex'>
+  <div className='flex mx-auto w-1/2'>
+    <div className='mx-auto'>
+      <p className='text-[#444444] text-left font-medium'>Export your data and use it for spreadsheets, machine learning models, and more.</p>
+      <button onClick={createCSV} className="bg-black text-white font-bold py-2 px-4 rounded mt-2 mb-5">
+        Create CSV
+      </button>
+      <p className='text-[#444444] font-medium text-left'>Edit your form.</p>
+      <button className='bg-green-500 text-white font-bold py-2 px-4 rounded mt-2 mb-5'>
+        Not Available
+      </button>
+    </div>
+    <div className='mx-auto ml-auto'>
+      <p className='text-[#444444] font-medium text-left'>Permanently delete your form.</p>
+      <button className='bg-red-600 text-white font-bold py-2 px-4 rounded mt-2'>
+        Delete Form
+      </button>
+    </div>
+  </div>
+</div>
+
             </div>
           )}
         </div>
