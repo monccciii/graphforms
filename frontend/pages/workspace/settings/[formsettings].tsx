@@ -132,10 +132,6 @@ export default function FormSettings() {
       <button onClick={createCSV} className="bg-black text-white font-bold py-2 px-4 rounded mt-2 mb-5">
         Create CSV
       </button>
-      <p className='text-[#444444] font-medium text-left'>Edit your form.</p>
-      <button className='bg-green-500 text-white font-bold py-2 px-4 rounded mt-2 mb-5'>
-        Not Available
-      </button>
     </div>
     <div className='mx-auto ml-auto'>
       <p className='text-[#444444] font-medium text-left'>Permanently delete your form.</p>
