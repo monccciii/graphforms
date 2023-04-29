@@ -123,7 +123,7 @@ export default function FormSettings() {
               <p className='text-center font-medium text-[#444444] mb-4'>Settings for form:</p>
               <h1 className='text-5xl font-semibold'>{fetchedData.name}</h1>
               <div className='flex'>
-                <div className='mx-auto w-1/2 border-b-4 mb-5'></div>
+                <div className='mx-auto w-1/2 border-b-4 mb-[8px]'></div>
               </div>
               <div className='flex'>
   <div className='flex mx-auto w-1/2'>
@@ -140,7 +140,7 @@ export default function FormSettings() {
     <div className='mx-auto ml-auto'>
       <p className='text-[#444444] font-medium text-left'>Permanently delete your form.</p>
       <button className='bg-red-600 text-white font-bold py-2 px-4 rounded mt-2'>
-        Delete Form
+        Not Available
       </button>
     </div>
   </div>

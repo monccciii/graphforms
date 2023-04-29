@@ -3,15 +3,10 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
-import { setToken, clearToken } from '../store/reducers/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Test() {
-  const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
   const router = useRouter();
-  const dispatch = useDispatch();
-  const count = useSelector((state: { count: number }) => state.count);
   
 
   return (
@@ -29,9 +24,9 @@ export default function Test() {
         </div>
         <div id='body' className='mt-[10vh] text-center'>
             <p>Graphforms test</p>
-            <button onClick={() => dispatch(setToken('my_token'))}>Set Token</button>
+            <button onClick={() => localStorage.setItem('token', '0')}>Set Token</button>
             &nbsp;
-            <button onClick={() => dispatch(clearToken())}>Clear Token</button>
+            <button onClick={() => localStorage.removeItem('token')}>Clear Token</button>
         </div>
       </div>
     </>
