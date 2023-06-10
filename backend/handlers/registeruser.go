@@ -28,24 +28,20 @@ func RegisterUser(c *gin.Context) {
 		return
 	}
 
-	// Check if username is already taken
 	var existingUser models.User
 	if err := client.Database("graphforms").Collection("users").FindOne(context.TODO(), bson.D{{"username", newUser.Username}}).Decode(&existingUser); err == nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Username already taken"})
 		return
 	}
 
-	// Generate a random salt
 	salt, err := GenerateSalt()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate salt"})
 		return
 	}
 
-	// Hash the password with the salt
 	hashedPassword := hashPassword(newUser.Password, salt)
 
-	// Insert new user with salt and hashed password
 	newUser.Password = hashedPassword
 	newUser.Salt = salt
 	_, err = client.Database("graphforms").Collection("users").InsertOne(context.TODO(), newUser)
@@ -58,14 +54,12 @@ func RegisterUser(c *gin.Context) {
 }
 
 func GenerateSalt() (string, error) {
-	// Generate a 16-byte random salt
 	salt := make([]byte, 16)
 	_, err := rand.Read(salt)
 	if err != nil {
 		return "", err
 	}
 
-	// Encode the salt as a base64 string
 	return base64.StdEncoding.EncodeToString(salt), nil
 }
 

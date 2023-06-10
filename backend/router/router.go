@@ -17,5 +17,6 @@ func SetupRoutes(router *gin.Engine) {
 	router.POST("/getresponses", handlers.GetResponses)
 	router.POST("/createcsv", handlers.CreateCsv)
 	router.POST("/yourforms", handlers.YourForms)
-
+	router.POST("/deleteform", handlers.DeleteForm)
+	router.POST("/visualize", handlers.VisualizeSelection)
 }

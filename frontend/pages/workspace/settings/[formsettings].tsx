@@ -64,11 +64,10 @@ export default function FormSettings() {
       });
   
       if (response.ok) {
-        const csvContent = await response.text(); // Read the CSV content as text
+        const csvContent = await response.text(); 
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
         const url = URL.createObjectURL(blob);
   
-        // Create a temporary anchor element to trigger the download
         const link = document.createElement("a");
         link.href = url;
         link.download = "form_data.csv";
@@ -95,6 +94,46 @@ export default function FormSettings() {
       });
     }
   }
+
+  async function deleteForm() {
+    let token = null;
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("token");
+    }
+  
+    try {
+      const response = await fetch(`${backendUrl}deleteform`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: formsettings,
+        }),
+      });
+  
+      if (response.ok) {
+        toast.success("Form deleted successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+  
+        // Navigate back to the forms list page (or wherever you want)
+        router.push("/workspace");
+      } else {
+        console.error(response.status);
+        toast.error("An error occurred while deleting the form. Please try again.", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred while sending the request. Please try again.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }
+  
   
   
 
@@ -135,8 +174,8 @@ export default function FormSettings() {
     </div>
     <div className='mx-auto ml-auto'>
       <p className='text-[#444444] font-medium text-left'>Permanently delete your form.</p>
-      <button className='bg-red-600 text-white font-bold py-2 px-4 rounded mt-2'>
-        Not Available
+      <button onClick={deleteForm} className='bg-red-600 text-white font-bold py-2 px-4 rounded mt-2'>
+        Delete Form
       </button>
     </div>
   </div>

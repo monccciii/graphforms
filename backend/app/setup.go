@@ -30,6 +30,6 @@ func SetupApp() error {
 	}))	
 	app.Use(middleware.AuthMiddleware())
 	router.SetupRoutes(app)
-	app.Run("0.0.0.0:80")
+	app.Run("0.0.0.0:8080")
 	return nil
 }
