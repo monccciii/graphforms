@@ -20,7 +20,8 @@ export default function Updates() {
         <Sidebar />
         <Navbar />
         <div id='body' className='mt-[10vh] text-center'>
-          <p className='font-semibold text-5xl'>Updates.</p>
+          <p className='font-semibold text-5xl'>Updates</p>
+          {/* <button className="mt-5 mb-1 rounded-2xl bg-blue-500 px-3 text-white font-semibold">Write Update</button> */}
           <div className='flex'>
             <div className='mx-auto w-1/2 border-b-4 mb-5'></div>
             </div>
