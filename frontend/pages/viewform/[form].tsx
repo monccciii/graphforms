@@ -73,7 +73,7 @@ export default function ViewForm() {
   useEffect(()=>{
     if (form) {
     fetchFormData()
-}},[])
+  }},[fetchFormData, form])
 
 
   return (

@@ -40,7 +40,7 @@ export default function SimpleAuth({ children }) {
     if (typeof window !== 'undefined') {
       checkToken();
     }
-  }, [])
+  }, [backendUrl, router])
 
   return (
     <>

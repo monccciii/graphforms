@@ -41,7 +41,7 @@ export default function Workspace() {
 
 useEffect(()=>{
   fetchForms()
-}, [])
+}, [fetchForms])
  
   return (
     <>

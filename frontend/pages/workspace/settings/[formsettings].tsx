@@ -147,7 +147,7 @@ export default function FormSettings() {
     if (formsettings) {
       fetchFormData();
     }
-  }, [formsettings]);
+  }, [fetchFormData, formsettings]);
 
   return (
     <>
@@ -253,7 +253,7 @@ export default function FormSettings() {
             </div>
             {/*body*/}
             <div className="relative p-6 flex-auto">
-              <p>Describe what data you will like to use and how you would like to use it. You may specify the way you'd like it visualized</p>
+              <p>Describe what data you will like to use and how you would like to use it. You may specify the way you&apos;d like it visualized</p>
               <div className="mt-2 mx-auto flex max-w-screen-sm items-center justify-center">
                 <div className="w-full rounded-2xl bg-gradient-to-r from-purple-500 via-blue-500 to-red-500 p-1">
                   <div className="flex w-full items-center justify-center rounded-2xl back">
