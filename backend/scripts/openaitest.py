@@ -3,6 +3,7 @@ from langchain.prompts import PromptTemplate
 from langchain import LLMChain,PromptTemplate
 from langchain.llms import OpenAI
 import sys, os
+
 def gptPredict():
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
