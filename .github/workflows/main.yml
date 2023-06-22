@@ -38,7 +38,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: Graphforms
-          environment_name: Graphforms-1
+          environment_name: Graphforms-Frontend
           version_label: ${{ github.sha }}-frontend
           region: us-east-1
           deployment_package: ${{ github.sha }}-frontend.zip
