@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
+RUN echo $NEXT_PUBLIC_API_URL
 
 
 COPY . .
