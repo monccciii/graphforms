@@ -14,5 +14,5 @@ RUN yarn build
 
 EXPOSE 80
 
-CMD ["yarn", "start", "--port", "80"]
+CMD cp /app/.env /app/.env.local && yarn start --port 80
 
