@@ -15,7 +15,7 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm i -g next
+          npm i -g next@latest
           next build
           zip -r ../${{ github.sha }}-frontend.zip .
 
