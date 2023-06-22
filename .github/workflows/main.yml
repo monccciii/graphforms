@@ -20,7 +20,6 @@ jobs:
           next build
           zip -r ../${{ github.sha }}-frontend.zip .
 
-
       - name: Generate backend deployment package
         run: cd backend && zip -r ../${{ github.sha }}-backend.zip .
 
