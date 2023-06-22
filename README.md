@@ -1,7 +1,7 @@
 # graphforms
 ### DS-centered form platform
 
-coming soon (aug 2023)
+on hiatus until access to GPT-4. will update soon.
 
 ### Technologies:
 __Frontend:__
