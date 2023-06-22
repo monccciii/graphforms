@@ -10,11 +10,12 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
-        
+
       - name: Install dependencies and build frontend
         run: |
           cd frontend
           npm install
+          npm install next
           next build
           zip -r ../${{ github.sha }}-frontend.zip .
 
