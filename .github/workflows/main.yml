@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies and build frontend
         run: |
           cd frontend
-          yarn install
-          yarn build
+          npm install
+          npm build
           zip -r ../${{ github.sha }}-frontend.zip .
 
       - name: Generate backend deployment package
