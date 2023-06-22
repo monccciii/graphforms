@@ -21,10 +21,10 @@ __Backend:__
 ### Technical Features:
   - Developed authentication middleware to protect routes.
   - Created a __CI/CD__ pipeline to deploy site on __AWS__.
+  - Detailed Langchain.js functions with the GPT-3 API for AI-assisted technology
   - Wrote __tests__ to catch errors before deployment.
   - Hashing and salting of credentials.
   - JWT with expiration.
-  - __Redux__ to persist tokens across pages.
   - CORS to prevent foreign origins and unused methods.
   - Established typography and clear visual hierarchy to provide better __UI/UX__.
   
