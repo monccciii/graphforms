@@ -5,8 +5,6 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
-RUN cp .env .env.local
-
 COPY . .
 
 
