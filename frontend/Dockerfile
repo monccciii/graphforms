@@ -5,7 +5,8 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
-RUN echo "NEXT_PUBLIC_API_URL=http://graphforms-backend.eba-kdp2wjph.us-east-1.elasticbeanstalk.com/" > .env.local
+RUN chmod +x setup.sh
+RUN ./setup.sh
 
 COPY . .
 

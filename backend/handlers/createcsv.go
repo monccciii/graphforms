@@ -60,7 +60,6 @@ func CreateCsv(c *gin.Context) {
         return
     }
 
-    //create CSV
    //create CSV
 	c.Writer.Header().Set("Content-Type", "text/csv")
 	c.Writer.Header().Set("Content-Disposition", fmt.Sprintf("attachment;filename=%s.csv", form.ID))
@@ -87,7 +86,7 @@ func CreateCsv(c *gin.Context) {
 			var headerRow []string
 			headerRow = append(headerRow, "Name")
 			for _, question := range form.Questions {
-				headerRow = append(headerRow, question.Text)
+				headerRow = append(headerRow, question.ShortName)
 			}
 			csvWriter.Write(headerRow)
 			firstRow = false

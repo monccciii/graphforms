@@ -48,7 +48,7 @@ function Sidebar() {
                   <div className="w-4 h-4"></div>
                   <div>Updates</div>
                 </Link>
-                <Link href="/hub" className="flex items-center gap-4 hover:text-gray-900">
+                <Link href="/youraccount" className="flex items-center gap-4 hover:text-gray-900">
                   <div className="w-4 h-4"></div>
                   <div>Your Account</div>
                 </Link>

@@ -10,8 +10,40 @@ import Navbar from '@/components/navbar';
 
 export default function Hub() {
   const backendUrl: string = process.env.NEXT_PUBLIC_API_URL!;
+  const [forms, setForms] = useState<any>();
   const router = useRouter();
  
+  async function fetchForms() {
+    let token = null;
+    let username = null;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+      username = localStorage.getItem('username');
+    }
+    try {
+      const response = await fetch(`${backendUrl}yourforms`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: username
+        })
+      });
+      const data = await response.json();
+      console.log(data);
+      setForms(data);
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  
+  useEffect(()=>{
+    if (!forms) {
+      fetchForms()
+    }
+  }, [fetchForms])
   return (
     <>
       <Head>
@@ -28,14 +60,14 @@ export default function Hub() {
             <p className='font-bold text-3xl sm:text-5xl mb-5'>GraphForms Hub</p>
             <div className='flex mb-20'>
               <div className='mx-auto w-1/2 border-t-2 border-b-2 py-10'>
-                <p className='text-xl text-left font-medium'>See what you can do with GraphForms.</p>
+                <p className='text-xl text-left font-regular'>See what you can do with GraphForms.</p>
                 {/* insert images/yt tutorials */}
                 <div className='mt-4 text-left mb-5'>
                   <button onClick={()=>router.push('/workspace')} className='bg-black text-white font-medium py-2 px-4 rounded'>
                     View your workspace
                   </button>
                 </div>
-                <p className='text-xl text-left font-medium'>See our recent updates.</p>
+                <p className='text-xl text-left font-regular'>See our recent updates.</p>
                 <div className='mt-4 text-left mb-5'>
                   <button className='bg-black text-white font-medium py-2 px-4 rounded'>
                     View our updates.
@@ -47,7 +79,20 @@ export default function Hub() {
             <div className='flex mb-20'>
               <div className='mx-auto w-1/2 border-t-2 border-b-2 py-10'>
               {/* Write code to grab all the forms created recently */}
-              <p>N/A</p>
+              {forms && forms.forms && forms.forms.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3">
+                  {forms.forms.reverse().slice(0, 3).map((form: any) => (
+                    <div key={form.id} className="border border-gray-300 p-4 mb-4 rounded-xl">
+                      <h2 className="text-xl font-bold">{form.name}</h2>
+                      <div onClick={() => router.push(`/viewform/${form.id}`)} className='rounded text-sm bg-blue-500 text-white inline-block px-2 py-1'>View</div>
+                      <div onClick={() => router.push(`/workspace/settings/${form.id}`)} className='rounded text-sm bg-slate-800 text-white inline-block px-2 py-1'>Settings</div>
+                    </div> 
+                  ))}
+                </div>
+              ) : (
+                <p className="border-2 border-dotted border-blue-300 p-4 mb-4 rounded-xl text-center font-semibold text-lg">You have no forms. Create one!</p>
+              )}
+    
               </div>
             </div>
         </div>

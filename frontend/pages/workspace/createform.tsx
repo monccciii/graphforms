@@ -13,7 +13,7 @@ export default function Createform() {
   const [formname, setFormname] = useState<String>('');
   const [description, setDescription] = useState<String>('');
   const [formData, setFormData] = useState<any[]>([
-    { question: '', type: 'text', options: [] },
+    { question: '', type: 'text', options: [], shortName: '' },
   ]);
   const router = useRouter();
 
@@ -37,6 +37,19 @@ export default function Createform() {
   function addOption(index: number) {
     const updatedFormData = [...formData];
     updatedFormData[index].options.push('');
+    setFormData(updatedFormData);
+  }
+
+  function removeQuestion(index: number) {
+    const updatedFormData = [...formData];
+    updatedFormData.splice(index, 1);
+    setFormData(updatedFormData);
+    setQuestionCount(questionCount - 1);
+  }
+
+  function removeOption(questionIndex: number, optionIndex: number) {
+    const updatedFormData = [...formData];
+    updatedFormData[questionIndex].options.splice(optionIndex, 1);
     setFormData(updatedFormData);
   }
 
@@ -135,7 +148,13 @@ export default function Createform() {
       onChange={(e) => updateFormData(i, 'question', e.target.value)}
     ></input>
   </div>
-  <div className='text-left'>
+  <div className='text-left mb-5'>
+    <input
+      className="text-sm ml-5 font-semibold"
+      placeholder="Short Name"
+      value={formData[i].shortName}
+      onChange={(e) => updateFormData(i, 'shortName', e.target.value)}
+    ></input>
     <select
       value={formData[i].type}
       onChange={(e) => updateFormData(i, 'type', e.target.value)}
@@ -144,11 +163,14 @@ export default function Createform() {
       <option value="text">Text</option>
       <option value="choice">Multiple Choice</option>
     </select>
+    <button onClick={() => removeQuestion(i)} className="bg-red-600 text-white font-bold text-sm py-1 px-2 rounded mt-4 ml-4">
+              Remove Question
+        </button>
   </div>
   <div className="flex flex-col">
     {formData[i].type === 'choice' &&
       formData[i].options.map((_: any, optionIndex: any) => (
-        <div className='flex items-center ml-5 text-left' key={optionIndex}>
+        <div className='flex items-center ml-5 text-left mb-2' key={optionIndex}>
           <div className='border border-slate-800 mr-1 rounded-2xl h-2 w-2'></div>
           <input
             value={formData[i].options[optionIndex]}
@@ -156,6 +178,9 @@ export default function Createform() {
             placeholder={`Option ${optionIndex + 1}`}
             className='text-sm font-semibold'
           />
+          <button onClick={() => removeOption(i, optionIndex)} className="bg-red-600 text-white text-[12px] font-bold text-sm py-1 px-2 rounded ml-4">
+          Remove Option
+          </button>
         </div>
       ))}
     {formData[i].type === 'choice' && (
@@ -169,10 +194,12 @@ export default function Createform() {
 </div>
 
           ))}
-             <button onClick={addQuestion} className="bg-black text-white font-bold py-2 px-4 rounded mr-4">
-                +
+          <div className="flex">
+            <button onClick={addQuestion} className="mx-auto bg-black text-white font-bold py-2 px-4 rounded ml-4">
+                + Add Question
               </button>
-          <button onClick={storeData} className="bg-black text-white font-bold py-2 px-4 rounded mt-4">
+          </div>
+          <button onClick={storeData} className="bg-green-600 text-white font-bold py-2 px-4 rounded mt-4">
             Create Form
           </button>
         </div>

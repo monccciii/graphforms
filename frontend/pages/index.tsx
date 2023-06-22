@@ -24,12 +24,12 @@ export default function Landing() {
           <div id='main' className='px-20 sm:px-[35]'>
             <p className='mt-[15vh] font-bold text-3xl sm:text-6xl'>Simplify your 🗃️data collection and 📊visualization.</p>
             <div className='flex'>
-              <p className='mx-auto mt-[5vh] font-medium text-[#444444] text-xl sm:text-2xl w-[40vw]'>GraphForms is the place where data collection and data visualization meet.</p>
+              <p className='mx-auto mt-[5vh] font-regular text-[#444444] text-xl sm:text-2xl w-[80vw]'>GraphForms is the place where data collection and data visualization meet.</p>
             </div>
             <div className='flex'>
               <button onClick={()=>router.push('/register')} className='mt-[10vh] mx-auto bg-black text-sm text-white font-semibold rounded-[10px] inline-block px-3 sm:px-5 py-3'>First form free, sign up now!</button>
             </div>
-            <div className='mt-[50vh]'>
+            <div className='mt-[30vh]'>
               <p className='text-3xl sm:text-4xl font-bold'>Visualize data up to 100% faster than competitors.</p>
             </div>
           </div>
@@ -40,14 +40,14 @@ export default function Landing() {
                   <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Easily visualize your data using GraphForms&apos; online tool. No need to use any programs or input data into a tool. GraphForms takes care of it from start to finish.</p>
                 </div>
                 <div className='mx-auto'>
-                  <Image src='/fillerimg.png' alt='' height={250} width={500}/>
+                  <Image src='/img1.png' alt='' height={250} width={500}/>
                 </div>
               </div>
             </div>
             <div id='benefit2' className='px-20 sm:px-[35] mt-[30vh]'>
               <div className='sm:flex items-center'>
               <div className='mx-auto'>
-                  <Image src='/fillerimg.png' alt='' height={250} width={500}/>
+                  <Image src='/img2.png' alt='' height={250} width={500}/>
                 </div>
                 <div className='text-left mx-auto w-[30vw]'>
                   <p className='text-xl sm:text-2xl font-medium'>Simple Exports</p>
@@ -62,7 +62,7 @@ export default function Landing() {
                   <p className='mt-[1vh] font-regular text-[#444444] text-[18px]'>Worry less about how to use GraphForms, and worry more about what&apos;s important. GraphForms&apos; intuitively designed UI helps you work on what&apos;s really important, your projects.</p>
                 </div>
                 <div className='mx-auto'>
-                  <Image src='/fillerimg.png' alt='' height={250} width={500}/>
+                  <Image src='/img3.png' alt='' height={250} width={500}/>
                 </div>
               </div>
             </div>

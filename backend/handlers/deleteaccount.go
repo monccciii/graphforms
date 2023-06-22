@@ -3,19 +3,14 @@ package handlers
 import (
 	"context"
 	"net/http"
-	"os"
-	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v5"
-	"github.com/google/uuid"
 	"github.com/monccciii/graphforms/db"
 	"github.com/monccciii/graphforms/models"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func LoginUser(c *gin.Context) {
-	// Connect to the database
+func DeleteUser(c *gin.Context) {
 	client, ctx, cancel, err := db.ConnectMongo()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -46,32 +41,25 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
-	// If the credentials are valid, generate a JWT token
-	token, err := generateToken(uuid.New().String(), loginDetails.Username)
+	// If the credentials are valid, delete the user
+	result, err := client.Database("graphforms").Collection("users").DeleteOne(context.TODO(), bson.M{"username": loginDetails.Username})
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	// Return the JWT token to the client
-	c.JSON(http.StatusOK, gin.H{"token": token})
-}
-
-func generateToken(id string, user string) (string, error) {
-	secretKey := []byte(os.Getenv("JWT_SECRET_KEY"))
-
-	// Create a new token object, specifying the signing method and the claims
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"uuid": id,
-		"user": user,
-		"exp":  time.Now().Add(time.Hour * 24).Unix(),
-	})
-
-	// Sign the token with the secret key
-	tokenString, err := token.SignedString(secretKey)
-	if err != nil {
-		return "", err
+	// Check if any user was deleted
+	if result.DeletedCount == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
 	}
 
-	return tokenString, nil
+	// Delete the user's forms
+	_, err = client.Database("graphforms").Collection("forms").DeleteMany(context.TODO(), bson.M{"username": loginDetails.Username})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "User and associated forms deleted"})
 }

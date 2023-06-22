@@ -40,7 +40,9 @@ export default function Workspace() {
 }
 
 useEffect(()=>{
-  fetchForms()
+  if (!forms) {
+    fetchForms()
+  }
 }, [fetchForms])
  
   return (
@@ -57,7 +59,7 @@ useEffect(()=>{
         <Navbar />
         <div id="body" className="mt-[10vh] text-center">
           <p className="text-center font-bold text-4xl">My forms</p>
-          <p className="text-center text-[#444444] mb-10 font-medium text-xl">
+          <p className="mt-2 text-center text-[#444444] mb-10 font-medium text-xl">
             Create new forms or view older forms here.
           </p>
           <button
@@ -68,16 +70,22 @@ useEffect(()=>{
           </button>
 
           <div className="flex justify-center">
-                <div className="mb-2 grid grid-cols-4 gap-4 w-1/2">
-                  {forms && forms.forms && forms.forms.map((form: any) => (
-                    <div key={form.id} className="border border-gray-300 p-4 mb-4 rounded-xl">
-                      <h2 className="text-xl font-bold">{form.name}</h2>
-                      <div onClick={()=>router.push(`/viewform/${form.id}`)} className='rounded text-sm bg-blue-500 text-white inline-block px-2 py-1'>View</div>
-                      <div onClick={()=>router.push(`/workspace/settings/${form.id}`)}  className='rounded text-sm bg-slate-800 text-white inline-block px-2 py-1'>Settings</div>
-                    </div> 
-                  ))}
+                {forms && forms.forms && forms.forms.length > 0 ? (
+                  <div className="mb-2 grid grid-cols-1 md:grid-cols-3 gap-4 w-1/2">
+                    {forms.forms.reverse().map((form: any) => (
+                      <div key={form.id} className="border border-gray-300 p-4 mb-4 rounded-xl">
+                        <h2 className="text-xl font-bold">{form.name}</h2>
+                        <div onClick={() => router.push(`/viewform/${form.id}`)} className='rounded text-sm bg-blue-500 text-white inline-block px-2 py-1'>View</div>
+                        <div onClick={() => router.push(`/workspace/settings/${form.id}`)} className='rounded text-sm bg-slate-800 text-white inline-block px-2 py-1'>Settings</div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mb-2 grid grid-cols-1 md:grid-cols-3 gap-4 w-1/2">
+                    <p className="border-2 border-dotted border-blue-300 p-4 mb-4 rounded-xl text-center font-semibold text-lg">You have no forms. Create one!</p>
+                  </div>
+                )}
                 </div>
-              </div>
           
         </div>
       </div>

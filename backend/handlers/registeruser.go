@@ -40,7 +40,7 @@ func RegisterUser(c *gin.Context) {
 		return
 	}
 
-	hashedPassword := hashPassword(newUser.Password, salt)
+	hashedPassword := HashPassword(newUser.Password, salt)
 
 	newUser.Password = hashedPassword
 	newUser.Salt = salt
@@ -63,7 +63,7 @@ func GenerateSalt() (string, error) {
 	return base64.StdEncoding.EncodeToString(salt), nil
 }
 
-func hashPassword(password, salt string) string {
+func HashPassword(password, salt string) string {
     saltedPassword := []byte(password + salt)
     hash := sha256.Sum256(saltedPassword)
     return base64.StdEncoding.EncodeToString(hash[:])
