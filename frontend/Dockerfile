@@ -5,8 +5,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install
 
-RUN chmod +x setup.sh
-RUN ./setup.sh
+
 
 COPY . .
 
