@@ -15,8 +15,8 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm i -g next@latest
-          next build
+          npm i next --save
+          npm run build
           zip -r ../${{ github.sha }}-frontend.zip .
 
       - name: Generate backend deployment package
