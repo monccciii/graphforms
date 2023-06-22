@@ -1,7 +1,7 @@
 # graphforms
 ### DS-centered form platform
 
-coming soon (mar-apr 2023)
+coming soon (aug 2023)
 
 ### Technologies:
 __Frontend:__
