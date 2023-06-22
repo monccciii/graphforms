@@ -842,3 +842,4 @@ node_modules/caniuse-lite/data/features/css-exclusions.js
 node_modules/caniuse-lite/data/features/css-featurequeries.js
 node_modules/caniuse-lite/data/features/css-file-selector-button.js
 node_modules/caniuse-lite/data/features/css-filter-function.js
+frontend/.env
