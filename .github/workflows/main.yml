@@ -8,31 +8,31 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
 
-      - name: Install dependencies and build frontend
-        run: |
-          cd frontend
-          npm install
-          npm i next --save
-          npm run build
-          zip -r ../${{ github.sha }}-frontend.zip .
+      # - name: Install dependencies and build frontend
+      #   run: |
+      #     cd frontend
+      #     npm install
+      #     npm i next --save
+      #     npm run build
+      #     zip -r ../${{ github.sha }}-frontend.zip .
 
       - name: Generate backend deployment package
         run: cd backend && zip -r ../${{ github.sha }}-backend.zip .
 
-      - name: Deploy frontend to EB
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: Graphforms
-          environment_name: Graphforms-Frontend
-          version_label: ${{ github.sha }}-frontend
-          region: us-east-1
-          deployment_package: ${{ github.sha }}-frontend.zip
-          use_existing_version_if_available: true
+      # - name: Deploy frontend to EB
+      #   uses: einaregilsson/beanstalk-deploy@v21
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     application_name: Graphforms
+      #     environment_name: Graphforms-Frontend
+      #     version_label: ${{ github.sha }}-frontend
+      #     region: us-east-1
+      #     deployment_package: ${{ github.sha }}-frontend.zip
+      #     use_existing_version_if_available: true
 
       - name: Deploy backend to EB
         uses: einaregilsson/beanstalk-deploy@v21
