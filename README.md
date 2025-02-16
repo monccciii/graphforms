@@ -1,8 +1,6 @@
 # graphforms
 ### DS-centered form platform
 
-on hiatus until access to GPT-4. will update soon.
-
 ### Technologies:
 __Frontend:__
   - __NextJS (Typescript)__
